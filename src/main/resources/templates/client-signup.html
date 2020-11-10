@@ -17,54 +17,66 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
       <fieldset>
       <input type="hidden" th:field="*{id}"/>
       
-      <div id="inputUser"> 
-        <label for="name"><img id="userImg" th:src="@{/images/af_user2.png}" alt="Nome"></label>
-        <input type="text" id="name" name="name" placeholder="Usuário" th:field="*{name}"/><br/><br/>
+      <div id="errorMessage" th:if="${#fields.hasErrors('name')}">
+            <span th:errors="*{name}"></span>     
+        </div>
+      <div id="inputUser" th:classappend="${#fields.hasErrors('name')} ? 'inputError' : '' "> 
+        <label for="name"><img id="userImg" th:src="@{/images/af_user.png}" alt="Nome"></label>
+        <input type="text" id="name" name="name" placeholder="Usuário" th:field="*{name}" /><br/><br/>
       </div>
-
-          <div id="errorMessage">
-            Menssagem de Erro!
-          </div>
-
-          <div  id="inputUser">
+      
+      
+      
+        <div id="errorMessage" th:if="${#fields.hasErrors('email')}">
+            <span th:errors="*{email}"></span>     
+        </div>
+          <div  id="inputUser" th:classappend="${#fields.hasErrors('email')} ? 'inputError' : '' " >
             <label for="email"><img id="userImg" th:src="@{/images/af_email.png}" alt="E-mail"></label>
             <input type="text" id="email" name="email" placeholder="E-mail" th:field="*{email}"/><br/><br/>
           </div>
 			
-			      <div id="inputUser">
-            <label for="phonenumber"><img id="userImg" th:src="@{/images/af_cep.png}" alt="Telefone"></label>
-            <input type="text" id="phonenumber" name="phonenumber" placeholder="Telefone" th:field="*{phonenumber}"/><br/><br/>
+			  <div id="errorMessage" th:if="${#fields.hasErrors('phonenumber')}" >
+            <span th:errors="*{phonenumber}"></span>     
+        </div>
+			      <div id="inputUser" th:classappend="${#fields.hasErrors('phonenumber')} ? 'inputError' : '' ">
+            <label id="labelInput" for="phonenumber"><img id="userImg" th:src="@{/images/af_phone.png}" alt="Telefone"></label>
+            <input type="text" id="phonenumber" name="phonenumber" placeholder="Telefone" th:field="*{phonenumber}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div>
 
-          <div class="inputError" id="inputUser">
+
+
+ 		 <div id="errorMessage" th:if="${#fields.hasErrors('cpf')}">
+            <span th:errors="*{cpf}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : '' ">
             <label for="cpf"><img id="userImg" th:src="@{/images/af_cpf.png}" alt="CPF"></label>
-            <input type="text" id="cpf" name="cpf" placeholder="CPF" th:field="*{cpf}" /><br/><br/>
+            <input type="text" id="cpf" name="cpf" placeholder="CPF" th:field="*{cpf}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div>
 
 
-          <div id="inputUser">
+		<div id="errorMessage" th:if="${#fields.hasErrors('cep')}">
+            <span th:errors="*{cep}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
             <label for="cep"><img id="userImg" th:src="@{/images/af_cep.png}" alt="CEP"></label>
-            <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}"/><br/><br/>
-          </div>
+            <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}" onkeydown="return isNumberKey(event);"/><br/><br/>
+          </div> 
 
 
-          <div id="inputUser">
+		<div id="errorMessage" th:if="${#fields.hasErrors('password')}">
+            <span th:errors="*{password}"></span>     
+        </div>
+          <div id="inputUser" th:if="${!editMode}" th:classappend="${#fields.hasErrors('password')} ? 'inputError' : '' ">
             <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
             <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
           </div>
-
-
-          <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
-          <input type="button" name="" value="Voltar">
-
-
+          <input type="hidden" name="password" value="*" th:if="${editMode}"/>
       </fieldset>
+      		
+                <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
+          		<input type="button" name="" value="Voltar">
     </form>
       <br/>
-
-
-
-
 		</div>
 	</div>
 

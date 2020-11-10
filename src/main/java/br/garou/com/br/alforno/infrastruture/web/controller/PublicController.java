@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.garou.com.br.alforno.application.ClientService;
+import br.garou.com.br.alforno.application.RestaurantService;
+import br.garou.com.br.alforno.application.ValidationException;
 import br.garou.com.br.alforno.domain.client.Client;
+import br.garou.com.br.alforno.domain.restaurant.Restaurant;
 
 
 @Controller
@@ -28,7 +31,7 @@ public class PublicController {
 		ControllerHelper.setEditMode(model, false);
 		return "client-signup";
 	}
-
+	
 	@PostMapping(path = "/client/save")
 	public String saveClient(
 			@ModelAttribute("client") @Valid Client client, 
@@ -36,11 +39,50 @@ public class PublicController {
 			Model model) {
 		
 		if (!errors.hasErrors()) {
+			try {
 			clientService.saveClient(client);
 			model.addAttribute("msg", "Cliente gravado com Sucesso!");
+			
+			} catch (ValidationException e) {
+				errors.rejectValue("email", null, e.getMessage());
+				
+			}
+			
 			
 		}
 		ControllerHelper.setEditMode(model, false);
 		return "client-signup";
 		}
+	
+	
+	@Autowired
+	private RestaurantService restaurantService;
+	
+	
+	@GetMapping("/restaurant/new")
+	public String newRestaurant(Model model) {
+		model.addAttribute("restaurant", new Restaurant());
+		ControllerHelper.setEditMode(model, false);
+		return "restaurant-signup";
+	}
+
+	@PostMapping(path = "/restaurant/save")
+	public String saveRestaurant(
+			@ModelAttribute("restaurant") @Valid Restaurant restaurant, 
+			Errors errors, 
+			Model model) {
+		
+		if (!errors.hasErrors()) {
+			try {
+			restaurantService.saveRestaurant(restaurant);
+			model.addAttribute("msg", "Restaurante gravado com Sucesso!");
+			
+			} catch (ValidationException e) {
+				errors.rejectValue("email", null, e.getMessage());	
+			}		
+		}
+		ControllerHelper.setEditMode(model, false);
+		return "restaurant-signup";
+		}
+			
 }

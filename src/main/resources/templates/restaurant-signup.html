@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+  <body>
+<div layout:fragment="content">
+  <img id="logo2" src="images/af_logo2.png" alt="">
+  <h1>Cadastro de Restaurante</h1>
+
+  <div id="divSucess">
+    Sucesso!
+  </div><br>
+
+    <form class="" action="" method="post">
+      <fieldset>
+      <div id="inputUser">
+        <label for="nome"><img id="userImg" src="images/af_user2.png" alt="User"></label>
+        <input type="text" id="nome" name="nome" placeholder="Nome do Restaurante"/><br/><br/>
+      </div>
+
+          <div id="errorMessage">
+            Erro!
+          </div>
+
+          <div  id="inputUser">
+            <label for="email"><img id="userImg" src="images/af_email.png" alt="User"></label>
+            <input type="text" id="email" name="email" placeholder="E-mail"/><br/><br/>
+          </div>
+
+
+          <div class="inputError" id="inputUser">
+            <label for="cnpj"><img id="userImg" src="images/af_cpf.png" alt="CNPJ"></label>
+            <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ" /><br/><br/>
+          </div>
+
+
+          <div id="inputUser">
+            <label for="cep"><img id="userImg" src="images/af_cep.png" alt="CEP"></label>
+            <input type="text" id="cep" name="cep" placeholder="CEP"/><br/><br/>
+          </div>
+
+          <label for="categoria">Categoria: </label>
+          <select class="" name="categoria" id="categoria">
+            <option>Salada</option>
+            <option>Churraco</option>
+            <option>Pizza</option>
+            <option>Hamburguer</option>
+          </select><br><br>
+          <label for="logotipo">Logotipo: </label>
+          <input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
+
+
+          <div id="inputUser">
+            <label for="senha"><img id="userImg" src="images/af_senha.png" alt="Senha"></label>
+            <input type="text" id="senha" name="senha" placeholder="Senha"/><br/><br/>
+          </div>
+
+
+          <input type="button" name="" value="Cadastrar">
+          <input type="button" name="" value="Voltar" onclick="location.href='index.html';">
+
+		</div>
+	</body>
+</html>

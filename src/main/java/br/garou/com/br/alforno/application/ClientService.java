@@ -12,9 +12,41 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 	
-	public void saveClient(Client client) {
-		clientRepository.save(client);
+	public void saveClient(Client client) throws ValidationException {
 		
+		if (!validateEmail(client.getEmail(), client.getId())) {
+			throw new ValidationException("O e-mail já está cadastrado");
+		
+		}
+		
+		if (client.getId() != null) {
+			Client clientDB = clientRepository.findById(client.getId()).orElseThrow();
+			client.setPassword(clientDB.getPassword());
+			
+		}else {
+			client.encryptPassword();
+		}
+		
+		
+		clientRepository.save(client);
 	}
-
+	
+	private boolean validateEmail(String email, Integer id)  {
+		Client client = clientRepository.findByEmail(email);
+		
+		if (client != null) { 
+			if (id == null){
+		     return false;	
+		     
+			}
+			
+			if(!client.getId().equals(id)) {
+				return false;
+			} 
+				
+		}
+			
+			return true;
+		
+}
 }
