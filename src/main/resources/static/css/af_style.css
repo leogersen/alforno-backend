@@ -12,7 +12,7 @@ a{
   text-decoration: none;
   color: #000000;
 }
-
+                  
 a:hover{
   text-decoration: underline;
 
@@ -64,10 +64,13 @@ input[type=password]{
 }
 select{
   border: 3px solid rgb(255,21,93);
-  font-size: 20px;
+  color: #6b6b6b;
+  background-color: #f9ebee;
+  font-size: 15px;
   padding: 5px;
-  font-weight: bold;
 }
+
+
 textarea{
   border: 3px solid rgb(255,21,93);
   width: 400px;
@@ -286,3 +289,24 @@ div#formDiv{
 	display: inline-block;
 }
 
+input[type=file] {
+	display: none;
+}
+
+label#upload{
+	
+	margin: auto;
+	padding: 20px;
+  	background: rgb(255,21,93);
+  	background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+  	justify-content: center;
+  	align-items: center;
+  	color: white;
+  	vertical-align: middle;
+
+}
+
+span#spanUpload{
+	vertical-align: middle;
+	padding-bottom: 8px;
+}

@@ -3,63 +3,98 @@
 xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
+      
   <body>
 <div layout:fragment="content">
-  <img id="logo2" src="images/af_logo2.png" alt="">
+  <img id="logo2" th:src="@{/images/af_logo2.png}" alt="">
   <h1>Cadastro de Restaurante</h1>
 
-  <div id="divSucess">
-    Sucesso!
+  <div id="divSucess" th:if="${msg != null}">
+  <span th:text="${msg}"></span>
   </div><br>
 
-    <form class="" action="" method="post">
+    <form method="post" th:object="${restaurant}" th:action="${!editMode} ? @{/public/restaurant/save} : @{/restaurant/save}" >
       <fieldset>
-      <div id="inputUser">
-        <label for="nome"><img id="userImg" src="images/af_user2.png" alt="User"></label>
-        <input type="text" id="nome" name="nome" placeholder="Nome do Restaurante"/><br/><br/>
+      
+      <input type="hidden" th:field="*{id}"/>
+      
+      
+       <div id="errorMessage" th:if="${#fields.hasErrors('name')}">
+            <span th:errors="*{name}"></span>     
+      </div>
+      
+      <div id="inputUser" th:classappend="${#fields.hasErrors('name')} ? 'inputError' : '' ">
+        <label for="nome"><img id="userImg" th:src="@{/images/af_user.png}" alt="User"></label>
+        <input type="text" id="nome" name="nome" placeholder="Nome do Restaurante" th:field="*{name}"/><br/><br/>
       </div>
 
-          <div id="errorMessage">
-            Erro!
-          </div>
-
-          <div  id="inputUser">
-            <label for="email"><img id="userImg" src="images/af_email.png" alt="User"></label>
-            <input type="text" id="email" name="email" placeholder="E-mail"/><br/><br/>
-          </div>
 
 
-          <div class="inputError" id="inputUser">
-            <label for="cnpj"><img id="userImg" src="images/af_cpf.png" alt="CNPJ"></label>
-            <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ" /><br/><br/>
+        <div id="errorMessage" th:if="${#fields.hasErrors('email')}">
+            <span th:errors="*{email}"></span>     
+        </div>
+          <div  id="inputUser" th:classappend="${#fields.hasErrors('email')} ? 'inputError' : '' " >
+            <label for="email"><img id="userImg" th:src="@{/images/af_email.png}" alt="User"></label>
+            <input type="text" id="email" name="email" placeholder="E-mail" th:field="*{email}"/><br/><br/>
           </div>
 
 
-          <div id="inputUser">
-            <label for="cep"><img id="userImg" src="images/af_cep.png" alt="CEP"></label>
-            <input type="text" id="cep" name="cep" placeholder="CEP"/><br/><br/>
+
+			  <div id="errorMessage" th:if="${#fields.hasErrors('phonenumber')}" >
+            <span th:errors="*{phonenumber}"></span>     
+        </div>
+			      <div id="inputUser" th:classappend="${#fields.hasErrors('phonenumber')} ? 'inputError' : '' ">
+            <label id="labelInput" for="phonenumber"><img id="userImg" th:src="@{/images/af_phone.png}" alt="Telefone"></label>
+            <input type="text" id="phonenumber" name="phonenumber" placeholder="Telefone" th:field="*{phonenumber}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div>
+
+
+
+          
+          	 <div id="errorMessage" th:if="${#fields.hasErrors('cnpj')}">
+            <span th:errors="*{cnpj}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : '' ">
+            <label for="cnpj"><img id="userImg" th:src="@{/images/af_cpf.png}" alt="CNPJ"></label>
+            <input type="text" id="cnpj" name=""cnpj"" placeholder="CNPJ" th:field="*{cnpj}" onkeydown="return isNumberKey(event);"/><br/><br/>
+          </div>
+          
+		<div id="errorMessage" th:if="${#fields.hasErrors('cep')}">
+            <span th:errors="*{cep}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
+            <label for="cep"><img id="userImg" th:src="@{/images/af_cep.png}" alt="CEP"></label>
+            <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}" onkeydown="return isNumberKey(event);"/><br/><br/>
+          </div> 
+
 
           <label for="categoria">Categoria: </label>
           <select class="" name="categoria" id="categoria">
-            <option>Salada</option>
-            <option>Churraco</option>
-            <option>Pizza</option>
-            <option>Hamburguer</option>
-          </select><br><br>
-          <label for="logotipo">Logotipo: </label>
-          <input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
-
+            <option>Lanches</option>
+            <option>Pizzas</option>
+            <option>Japonesa</option>
+            <option>Mexicana</option>
+            <option>Italiana</option>
+            <option>Brasileira</option>
+            <option>Doces & Bolos</option>
+          </select><br/><br/><br/>
+          
+          
+          <input type="file" id="logotipo" name="logotipo" accept="image/*">
+           <label id="upload" for="logotipo">
+     		 <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione o Logotipo
+           </label>
+			<br/><br/><br/>
 
           <div id="inputUser">
-            <label for="senha"><img id="userImg" src="images/af_senha.png" alt="Senha"></label>
+            <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
             <input type="text" id="senha" name="senha" placeholder="Senha"/><br/><br/>
           </div>
-
+		</fieldset>
 
           <input type="button" name="" value="Cadastrar">
           <input type="button" name="" value="Voltar" onclick="location.href='index.html';">
-
+</form>
 		</div>
 	</body>
 </html>
