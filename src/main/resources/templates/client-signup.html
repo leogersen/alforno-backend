@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<div layout:fragment="content">
+	<div id="divLogo">
+  	<img id="logo2" th:src="@{/images/af_logo2.png}" alt="">
+  	<h1>Cadastro de Cliente</h1>
+
+  <div id="divSucess">
+    Sucesso!
+  </div><br>
+
+    <form method="post" th:object="${client}" th:action="${!editMode} ? @{/public/client/save} : @{/client/save}" >
+      <fieldset>
+      <input type="hidden" th:field="*{id}"/>
+      
+      <div id="inputUser">
+        <label for="nome"><img id="userImg" th:src="@{/images/af_user2.png}" alt="User"></label>
+        <input type="text" id="nome" name="nome" placeholder="Usuário" th:field="*{name}"/><br/><br/>
+      </div>
+
+          <div id="errorMessage">
+            Menssagem de Erro!
+          </div>
+
+          <div  id="inputUser">
+            <label for="email"><img id="userImg" th:src="@{/images/af_email.png}" alt="user"></label>
+            <input type="text" id="email" name="email" placeholder="E-mail" th:field="*{email}"/><br/><br/>
+          </div>
+			
+			      <div id="inputUser">
+            <label for="phonenumber"><img id="userImg" th:src="@{/images/af_cep.png}" alt="Telefone"></label>
+            <input type="text" id="phonenumber" name="phonenumber" placeholder="Telefone" th:field="*{phonenumber}"/><br/><br/>
+          </div>
+
+          <div class="inputError" id="inputUser">
+            <label for="cpf"><img id="userImg" th:src="@{/images/af_cpf.png}" alt="CPF"></label>
+            <input type="text" id="cpf" name="cpf" placeholder="CPF" th:field="*{cpf}" /><br/><br/>
+          </div>
+
+
+          <div id="inputUser">
+            <label for="cep"><img id="userImg" th:src="@{/images/af_cep.png}" alt="CEP"></label>
+            <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}"/><br/><br/>
+          </div>
+
+
+          <div id="inputUser">
+            <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
+            <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
+          </div>
+
+
+          <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
+          <input type="button" name="" value="Voltar">
+
+
+      </fieldset>
+    </form>
+      <br/>
+
+
+
+
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Variable&display=swap');
+*{
+  font-family: 'Source Sans Variable', sans-serif;
+}
+
+body{
+  text-align: center;
+  margin: 0px;
+}
+
+a{
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover{
+  text-decoration: underline;
+
+}
+
+h1{
+  color: rgb(255,21,93);
+  background-color: #eee;
+  text-transform: uppercase;
+  font-size: 20px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+
+}
+
+input{
+  border: 0px;
+  display: inline-block;
+  background-color: transparent;
+  height: 30px;
+  width: 400px;
+}
+input[type=button],
+input[type=submit]{
+  margin: 5px;
+  height: 50px;
+  width: 170px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  background: rgba(195,60,54,1);
+  color: #fff;
+  background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+}
+input[type=button]:hover,
+input[type=submit]:hover{
+  color: #fff;
+  background: rgb(255,21,93);
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+input[type=text]{
+  padding-left: 2px;
+}
+select{
+  border: 3px solid rgb(255,21,93);
+  font-size: 20px;
+  padding: 5px;
+  font-weight: bold;
+}
+textarea{
+  border: 3px solid rgb(255,21,93);
+  width: 400px;
+}
+
+fieldset{
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 0px;
+
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9ebee;
+  font-size: 14px;
+  border-spacing: 1px;
+}
+tr{
+}
+tr:nth-child(even){
+  background-color: #ffbbcc;
+}
+tr:nth-child(odd){
+  background-color: #F7E3E8;
+}
+
+td{
+  padding: 15px
+}
+th{
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+input#numero,
+input#inicio,
+input#fim{
+  font-size: 15px;
+  border: 1px;
+  margin-bottom: 10px;
+  background-color: #F7E3E8;
+  padding-left: 10px;
+
+}
+div#title{
+  background: rgb(255,21,93);
+  background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+  height: 70px;
+}
+
+img#letterWhite{
+  height: 60%;
+  vertical-align: middle;
+}
+span#auxiliar{
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+img#logo2{
+  width: 280px;
+}
+
+div#errorMessage{
+  background: rgb(255,21,93);
+  background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 460px;
+  color: #fff;
+
+}
+div#errorMessage2{
+  background: rgb(255,21,93);
+  background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  color: #fff;
+}
+
+div#divUser{
+  color: rgb(255,21,93);
+  line-height: 40px;
+  background-color: #eee;
+}
+
+img#cartImg{
+  height: 50px;
+}
+img#userImg{
+  width: 50px;
+  border: 0px;
+  margin: 0px;
+
+}
+div#divInputCart{
+  display: inline-block;
+  background-color: #F7E3E8;
+  height: 30px;
+  width: auto;
+  margin-bottom: 20px;
+}
+input[type=text]#inputCart{
+  text-align: center;
+}
+div#inputUser{
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #F7E3E8;
+  height: 50px;
+  width: auto;
+  margin-bottom: 20px;
+
+}
+
+div#divCat{
+  width: 20%;
+  height: 150px;
+  float: left;
+  background-color: #fff;
+}
+img#catImg{
+  height: 70%;
+}
+
+div#divGeralCat{
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+fieldset#fieldSearch{
+  border-width: 0px;
+}
+input#sbuttonFilter{
+ background: rgb(255,21,93);
+ float: left;
+ font-size: 12px;
+ height: 40px;
+ width: 150px;
+
+}
+img#restImg{
+  height: 180px;
+}
+span#restName{
+  font-weight: bold;
+}
+div#divRest{
+  display: inline-block;
+  width: 33%;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+input[type=button]#buttonFilter{
+  float: left;
+  font-size: 12px;
+  height: 40px;
+  width: 150px;
+}
+div#divSucess{
+  background-color: rgb(191, 249, 159);
+  width: 460px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inputError{
+  border: 2px solid #ff2828;
+}
+div#divLogo{
+  padding: 30px;
+}
+img#errorImg{
+  width: 400px;
+}
+input[type=submit]#buttomNew,
+input[type=button]#buttomNew{
+
+  font-size: 12px;
+}
+input[type=button]#buttomLarge{
+  width: 410px;
+}
+img#cartBigImg{
+  width: 150px;
+  padding: 20px;
+}
+input[type=button]#divButtom{
+  width: 100%;
+  float: none;
+}
+input[type=checkbox]{
+  width: 20px;
+  vertical-align: middle;
+
+}
