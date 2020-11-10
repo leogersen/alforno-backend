@@ -9,17 +9,17 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
   	<img id="logo2" th:src="@{/images/af_logo2.png}" alt="">
   	<h1>Cadastro de Cliente</h1>
 
-  <div id="divSucess">
-    Sucesso!
-  </div><br>
+  <div id="divSucess" th:if="${msg != null}">
+  <span th:text="${msg}"></span>
+  </div><br/>
 
     <form method="post" th:object="${client}" th:action="${!editMode} ? @{/public/client/save} : @{/client/save}" >
       <fieldset>
       <input type="hidden" th:field="*{id}"/>
       
-      <div id="inputUser">
-        <label for="nome"><img id="userImg" th:src="@{/images/af_user2.png}" alt="User"></label>
-        <input type="text" id="nome" name="nome" placeholder="Usuário" th:field="*{name}"/><br/><br/>
+      <div id="inputUser"> 
+        <label for="name"><img id="userImg" th:src="@{/images/af_user2.png}" alt="Nome"></label>
+        <input type="text" id="name" name="name" placeholder="Usuário" th:field="*{name}"/><br/><br/>
       </div>
 
           <div id="errorMessage">
@@ -27,7 +27,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
           </div>
 
           <div  id="inputUser">
-            <label for="email"><img id="userImg" th:src="@{/images/af_email.png}" alt="user"></label>
+            <label for="email"><img id="userImg" th:src="@{/images/af_email.png}" alt="E-mail"></label>
             <input type="text" id="email" name="email" placeholder="E-mail" th:field="*{email}"/><br/><br/>
           </div>
 			
