@@ -67,7 +67,9 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
             <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div> 
 
-
+		<div id="errorMessage" th:if="${#fields.hasErrors('categories')}">
+            <span th:errors="*{categories}"></span>     
+        </div>
           <label for="categoria">Categoria: </label>
           <select class="" name="category" id="categoria" th:field="*{categories}">
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>

@@ -15,9 +15,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-
-import br.garou.com.br.alforno.domain.restaurant.Restaurant;
 import br.garou.com.br.alforno.domain.user.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -58,8 +57,11 @@ public class Restaurant extends User{
 		name = "restaurant_has_category",
 		joinColumns = @JoinColumn(name = "restaurant_id"),
 		inverseJoinColumns = @JoinColumn(name = "restaurant_category_id")
+		
 		)
 
+	@Size(min = 1, message = "O restaurante precisa ter categoria")
+	@lombok.ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
 
 }
