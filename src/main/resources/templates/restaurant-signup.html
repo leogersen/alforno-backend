@@ -56,7 +56,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
         </div>
           <div id="inputUser" th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : '' ">
             <label for="cnpj"><img id="userImg" th:src="@{/images/af_cpf.png}" alt="CNPJ"></label>
-            <input type="text" id="cnpj" name=""cnpj"" placeholder="CNPJ" th:field="*{cnpj}" onkeydown="return isNumberKey(event);"/><br/><br/>
+            <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ" th:field="*{cnpj}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div>
           
 		<div id="errorMessage" th:if="${#fields.hasErrors('cep')}">
@@ -69,14 +69,9 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
 
           <label for="categoria">Categoria: </label>
-          <select class="" name="categoria" id="categoria">
-            <option>Lanches</option>
-            <option>Pizzas</option>
-            <option>Japonesa</option>
-            <option>Mexicana</option>
-            <option>Italiana</option>
-            <option>Brasileira</option>
-            <option>Doces & Bolos</option>
+          <select class="" name="category" id="categoria" th:field="*{categories}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+
           </select><br/><br/><br/>
           
           
@@ -86,14 +81,17 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
            </label>
 			<br/><br/><br/>
 
-          <div id="inputUser">
+				<div id="errorMessage" th:if="${#fields.hasErrors('password')}">
+            <span th:errors="*{password}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
             <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
-            <input type="text" id="senha" name="senha" placeholder="Senha"/><br/><br/>
+            <input type="text" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
           </div>
 		</fieldset>
 
-          <input type="button" name="" value="Cadastrar">
-          <input type="button" name="" value="Voltar" onclick="location.href='index.html';">
+          <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
+          <input type="button" name="" value="Voltar" onclick="location.href='/';">
 </form>
 		</div>
 	</body>

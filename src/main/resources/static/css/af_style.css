@@ -305,6 +305,9 @@ label#upload{
   	vertical-align: middle;
 
 }
+label#upload:hover{
+	background: rgb(255,21,93);
+}
 
 span#spanUpload{
 	vertical-align: middle;

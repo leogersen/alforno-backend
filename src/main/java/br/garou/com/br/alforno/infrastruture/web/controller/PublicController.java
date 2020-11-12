@@ -16,6 +16,7 @@ import br.garou.com.br.alforno.application.RestaurantService;
 import br.garou.com.br.alforno.application.ValidationException;
 import br.garou.com.br.alforno.domain.client.Client;
 import br.garou.com.br.alforno.domain.restaurant.Restaurant;
+import br.garou.com.br.alforno.domain.restaurant.RestaurantCategoryRepository;
 
 
 @Controller
@@ -24,6 +25,9 @@ public class PublicController {
 	
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private RestaurantCategoryRepository restaurantCategoryRepository;
 	
 	@GetMapping("/client/new")
 	public String newClient(Model model) {
@@ -63,6 +67,7 @@ public class PublicController {
 	public String newRestaurant(Model model) {
 		model.addAttribute("restaurant", new Restaurant());
 		ControllerHelper.setEditMode(model, false);
+		ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
 		return "restaurant-signup";
 	}
 
@@ -82,6 +87,8 @@ public class PublicController {
 			}		
 		}
 		ControllerHelper.setEditMode(model, false);
+
+
 		return "restaurant-signup";
 		}
 			
