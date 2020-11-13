@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.garou.com.br.alforno.domain.user.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,7 +32,11 @@ import lombok.Setter;
 @Table(name = "restaurant")
 public class Restaurant extends User{
 	
-	private String logotippo;
+	
+	@Size(max = 80)
+	private String logo;
+	
+	private transient MultipartFile logoFile;
 	
 	@NotBlank(message = "O campo CNPJ não pode estar vazio")
 	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
@@ -42,15 +48,15 @@ public class Restaurant extends User{
 	@Column(length = 8)
 	private String cep;
 	
-	@NotNull(message = "O campo tempo de entrega não pode estar vazio")
+	@NotNull(message = "O campo taxa de entrega não pode estar vazio")
 	@Min(0)
 	@Max(120)
-	private BigDecimal taxaEntrega;
+	private BigDecimal deliveryTax;
 	
 	@NotNull(message = "O campo tempo de entrega não pode estar vazio")
 	@Min(0)
 	@Max(120)
-	private Integer tempoEntregaBase;
+	private Integer deliveryTime;
 	
 	@ManyToMany
 	@JoinTable(
@@ -60,8 +66,15 @@ public class Restaurant extends User{
 		
 		)
 
-	@Size(min = 1, message = "O restaurante precisa ter categoria")
-	@lombok.ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
+	
+	public void setLogoFileName() {
+		if (getId() == null) {
+			throw new IllegalStateException("É preciso primeiro gravar o registro");
+			
+		}
+		//TODO change file format
+		this.logo = String.format("af_restaurant_%04d.%s", getId(), ".png");
+	}
 
 }

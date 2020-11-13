@@ -13,7 +13,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
   <span th:text="${msg}"></span>
   </div><br>
 
-    <form method="post" th:object="${restaurant}" th:action="${!editMode} ? @{/public/restaurant/save} : @{/restaurant/save}" >
+    <form method="post" th:object="${restaurant}" th:action="${!editMode} ? @{/public/restaurant/save} : @{/restaurant/save}" enctype="multipart/form-data">
       <fieldset>
       
       <input type="hidden" th:field="*{id}"/>
@@ -66,31 +66,50 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
             <label for="cep"><img id="userImg" th:src="@{/images/af_cep.png}" alt="CEP"></label>
             <input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}" onkeydown="return isNumberKey(event);"/><br/><br/>
           </div> 
-
-		<div id="errorMessage" th:if="${#fields.hasErrors('categories')}">
-            <span th:errors="*{categories}"></span>     
+          
+          
+          
+          	<div id="errorMessage" th:if="${#fields.hasErrors('deliveryTax')}">
+            <span th:errors="*{deliveryTax}"></span>     
         </div>
-          <label for="categoria">Categoria: </label>
-          <select class="" name="category" id="categoria" th:field="*{categories}">
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
+            <label for="deliveryTax"><img id="userImg" th:src="@{/images/af_cep.png}" alt="Delivery Tax"></label>
+            <input type="text" id="deliveryTax" name="deliveryTax" placeholder="Taxa de Entrega" th:field="*{deliveryTax}"/><br/><br/>
+          </div> 
+          
+          	<div id="errorMessage" th:if="${#fields.hasErrors('deliveryTime')}">
+            <span th:errors="*{cep}"></span>     
+        </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
+            <label for="deliveryTime"><img id="userImg" th:src="@{/images/af_cep.png}" alt="Delivery Time"></label>
+            <input type="text" id="deliveryTime" name="deliveryTime" placeholder="Tempo de Entrega" th:field="*{deliveryTime}"/><br/><br/>
+          </div> 
 
+
+
+
+   		<label for="categoria">Categoria: </label>
+          <select name="category" id="categoria" th:field="*{categories}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
           </select><br/><br/><br/>
           
           
-          <input type="file" id="logotipo" name="logotipo" accept="image/*">
-           <label id="upload" for="logotipo">
+         <input type="file" id="logo" name="logo" th:field="*{logoFile}" >
+           <label id="upload" for="logo">
      		 <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione o Logotipo
            </label>
 			<br/><br/><br/>
 
-				<div id="errorMessage" th:if="${#fields.hasErrors('password')}">
+
+  <div id="errorMessage" th:if="${#fields.hasErrors('password')}">
             <span th:errors="*{password}"></span>     
-        </div>
-          <div id="inputUser" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : '' ">
+      </div>
+          <div id="inputUser" th:classappend="${#fields.hasErrors('password')} ? 'inputError' : '' ">
             <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
-            <input type="text" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
+            <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
           </div>
 		</fieldset>
+
 
           <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
           <input type="button" name="" value="Voltar" onclick="location.href='/';">

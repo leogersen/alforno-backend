@@ -17,11 +17,22 @@ public class RestaurantService {
 		
 		if (!validateEmail(restaurant.getEmail(), restaurant.getId())) {
 			throw new ValidationException("O e-mail já está cadastrado");
-		
+		 
 		}
-				
 		
-		restaurantRepository.save(restaurant);
+		if (restaurant.getId() != null) {
+			Restaurant restaurantDB = restaurantRepository.findById(restaurant.getId()).orElseThrow();
+			restaurant.setPassword(restaurantDB.getPassword());
+			
+		}else {
+			restaurant.encryptPassword();
+			restaurant = restaurantRepository.save(restaurant);
+			restaurant.setLogoFileName();
+			//TODO Upload
+			
+		}		
+		
+
 	}
 	
 	private boolean validateEmail(java.lang.String string, Integer id)  {

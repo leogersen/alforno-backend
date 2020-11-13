@@ -27,6 +27,10 @@ public class PublicController {
 	private ClientService clientService;
 	
 	@Autowired
+	private RestaurantService restaurantService;
+	
+	
+	@Autowired
 	private RestaurantCategoryRepository restaurantCategoryRepository;
 	
 	@GetMapping("/client/new")
@@ -58,9 +62,7 @@ public class PublicController {
 		return "client-signup";
 		}
 	
-	
-	@Autowired
-	private RestaurantService restaurantService;
+
 	
 	
 	@GetMapping("/restaurant/new")
@@ -88,7 +90,8 @@ public class PublicController {
 		}
 		ControllerHelper.setEditMode(model, false);
 		ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
-
+		
+		
 
 		return "restaurant-signup";
 		}
