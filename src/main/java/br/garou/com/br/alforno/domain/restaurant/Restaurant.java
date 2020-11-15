@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.garou.com.br.alforno.domain.user.User;
+import br.garou.com.br.alforno.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -73,8 +74,8 @@ public class Restaurant extends User{
 			throw new IllegalStateException("É preciso primeiro gravar o registro");
 			
 		}
-		//TODO change file format
-		this.logo = String.format("af_restaurant_%04d.%s", getId(), ".png");
+		
+		this.logo = String.format("af_restaurant_%04d.%s", getId(), FileType.of(logoFile.getContentType()).getExtension());
 	}
 
 }

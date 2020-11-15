@@ -13,6 +13,9 @@ public class RestaurantService {
 	@Autowired
 	private RestaurantRepository restaurantRepository;
 	
+	@Autowired
+	private ImageService imageService;
+	
 	public void saveRestaurant(Restaurant restaurant) throws ValidationException {
 		
 		if (!validateEmail(restaurant.getEmail(), restaurant.getId())) {
@@ -28,7 +31,7 @@ public class RestaurantService {
 			restaurant.encryptPassword();
 			restaurant = restaurantRepository.save(restaurant);
 			restaurant.setLogoFileName();
-			//TODO Upload
+			imageService.uploadLogo(restaurant.getLogoFile(), restaurant.getLogo());
 			
 		}		
 		
