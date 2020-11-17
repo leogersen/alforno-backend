@@ -43,7 +43,7 @@ public class User implements Serializable {
 	private String password;
 	
 	@NotBlank(message = "O campo campo telefone não pode estar vazio")
-	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inválido")
+	@Pattern(regexp = "[0-9]{10,14}", message = "O telefone possui formato inválido")
 	@Column(length = 11, nullable = false)
 	private String phonenumber;
 	

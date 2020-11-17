@@ -28,6 +28,7 @@ public class RestaurantCategory implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Integer id;
 	
 	@NotNull

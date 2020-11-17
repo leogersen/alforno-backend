@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.garou.com.br.alforno.application.ClientService;
-import br.garou.com.br.alforno.application.RestaurantService;
-import br.garou.com.br.alforno.application.ValidationException;
+import br.garou.com.br.alforno.application.service.ClientService;
+import br.garou.com.br.alforno.application.service.RestaurantService;
+import br.garou.com.br.alforno.application.service.ValidationException;
 import br.garou.com.br.alforno.domain.client.Client;
 import br.garou.com.br.alforno.domain.restaurant.Restaurant;
 import br.garou.com.br.alforno.domain.restaurant.RestaurantCategoryRepository;

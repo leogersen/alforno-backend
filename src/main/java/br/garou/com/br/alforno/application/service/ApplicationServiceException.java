@@ -1,4 +1,4 @@
-package br.garou.com.br.alforno.application;
+package br.garou.com.br.alforno.application.service;
 
 @SuppressWarnings("serial")
 public class ApplicationServiceException extends RuntimeException {

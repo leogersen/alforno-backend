@@ -94,11 +94,18 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
           </select><br/><br/><br/>
           
           
-         <input type="file" id="logo" name="logo" th:field="*{logoFile}" >
+          
+          
+      	<div id="errorMessage3" th:if="${#fields.hasErrors('logoFile')}">
+            <span th:errors="*{logoFile}"></span>     
+        </div>
+            
+         <input type="file" id="logo" name="logo" th:field="*{logoFile}" th:classappend="${#fields.hasErrors('logoFile')} ? 'inputError' : '' " >
            <label id="upload" for="logo">
      		 <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione o Logotipo
            </label>
 			<br/><br/><br/>
+
 
 
   <div id="errorMessage" th:if="${#fields.hasErrors('password')}">
@@ -112,7 +119,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
 
           <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
-          <input type="button" name="" value="Voltar" onclick="location.href='/';">
+          <input type="button" name="" value="Voltar" th:onclick="'location.href=\''+ @{/rastaurant/home} + '\';'"/>
 </form>
 		</div>
 	</body>

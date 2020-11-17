@@ -1,9 +1,12 @@
-package br.garou.com.br.alforno.application;
+package br.garou.com.br.alforno.application.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.garou.com.br.alforno.domain.client.Client;
+import br.garou.com.br.alforno.domain.client.ClientRepository;
 import br.garou.com.br.alforno.domain.restaurant.Restaurant;
 import br.garou.com.br.alforno.domain.restaurant.RestaurantRepository;
 
@@ -14,8 +17,12 @@ public class RestaurantService {
 	private RestaurantRepository restaurantRepository;
 	
 	@Autowired
+	private ClientRepository clientRepository;
+	
+	@Autowired
 	private ImageService imageService;
 	
+	@Transactional
 	public void saveRestaurant(Restaurant restaurant) throws ValidationException {
 		
 		if (!validateEmail(restaurant.getEmail(), restaurant.getId())) {
@@ -38,8 +45,17 @@ public class RestaurantService {
 
 	}
 	
-	private boolean validateEmail(java.lang.String string, Integer id)  {
-		Restaurant restaurant = restaurantRepository.findByEmail(string);
+	private boolean validateEmail(String email, Integer id)  {
+		Client client = clientRepository.findByEmail(email);
+		
+		if (client != null) {
+			return false;
+		}
+		
+		
+		
+		
+		Restaurant restaurant = restaurantRepository.findByEmail(email);
 		
 		if (restaurant != null) { 
 			if (id == null){

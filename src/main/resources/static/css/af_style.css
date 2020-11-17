@@ -158,6 +158,17 @@ div#errorMessage2{
   width: 100%;
   color: #fff;
 }
+div#errorMessage3{
+  background: rgb(255,21,93);
+  background: linear-gradient(90deg, rgba(255,21,93,1) 0%, rgba(195,60,54,1) 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  width: 217px;
+  color: #fff;
+}
+
 
 div#divUser{
   color: rgb(255,21,93);

@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.garou.com.br.alforno.domain.user.User;
+import br.garou.com.br.alforno.infrastruture.web.validator.UploadConstraint;
 import br.garou.com.br.alforno.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class Restaurant extends User{
 	@Size(max = 80)
 	private String logo;
 	
+	@UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo é inválido")
 	private transient MultipartFile logoFile;
 	
 	@NotBlank(message = "O campo CNPJ não pode estar vazio")

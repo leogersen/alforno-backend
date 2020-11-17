@@ -17,9 +17,8 @@ public class StringUtils {
 			return null;
 		}
 		
-		//PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		//return encoder.encode(rawString);
-		return rawString;
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return encoder.encode(rawString);
 	}
 
 }

@@ -74,7 +74,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
       </fieldset>
       		
                 <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
-          		<input type="button" name="" value="Voltar" onclick="location.href='/';">
+          		<input type="button" name="" value="Voltar" th:onclick="'location.href=\''+ @{/client/home} + '\';'"/>
     </form>
       <br/>
 		</div>
