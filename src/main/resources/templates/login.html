@@ -8,7 +8,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
     <div class="">
       <img id="logo2" th:src="@{images/af_logo2.png}" alt="">
       <h1>Login</h1>
-      <form class="" action="" method="post">
+      <form th:action="@{/login}" method="post">
 
         <fieldset>
           <div id="inputUser">
@@ -21,16 +21,14 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
             <input type="text" id="senha" name="senha" placeholder="Senha"/><br/><br/>
           </div>
 
-        <input type="button" name="button" value="Entrar" onclick="location.href='clientHome.html';">
+        <input type="submit" name="button" value="Entrar" onclick="location.href='clientHome.html';">
 
         </fieldset>
 
       </form>
       <br>
-      <div id="errorMessage">
-
-        Erro!
-
+      <div id="errorMessage" th:if="${msg != null}">
+		<span th:text="${msg}"></span>
       </div><br>
       
    <div id="formDiv">
