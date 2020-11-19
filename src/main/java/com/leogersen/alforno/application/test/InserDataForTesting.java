@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.client.ClientRepository;
+import com.leogersen.alforno.domain.restaurant.ItemMenu;
+import com.leogersen.alforno.domain.restaurant.ItemMenuRepository;
 import com.leogersen.alforno.domain.restaurant.Restaurant;
 import com.leogersen.alforno.domain.restaurant.RestaurantCategory;
 import com.leogersen.alforno.domain.restaurant.RestaurantCategoryRepository;
@@ -32,11 +34,15 @@ public class InserDataForTesting {
 	private RestaurantCategoryRepository restaurantCategoryRepository;
 	
 	
+	@Autowired
+	private ItemMenuRepository itemMenuRepository;
+	
+	
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		clients();
-		@SuppressWarnings("unused")
 		Restaurant[] restaurants = restaurants();
+		itensMenu(restaurants);
 		
 		
 	}
@@ -156,5 +162,34 @@ public class InserDataForTesting {
 		
 		
 	}
+	
+	private void itensMenu(Restaurant[] restaurants) {
+		ItemMenu im = new ItemMenu();
+		im.setCategory("Lanches");
+		im.setDescription("Delicioso sanduíche de frango com legumes.");
+		im.setName("Chiken Burger");
+		im.setPrice(BigDecimal.valueOf(17.8));
+		im.setRestaurant(restaurants[0]);
+		im.setHighlight(false);
+		im.setImage("0001-food.png");
+		itemMenuRepository.save(im);
+		
+		
+		im = new ItemMenu();
+		im.setCategory("Lanches");
+		im.setDescription("Delicioso sanduíche de frango com legumes.");
+		im.setName("Super Burger");
+		im.setPrice(BigDecimal.valueOf(17.8));
+		im.setRestaurant(restaurants[1]);
+		im.setHighlight(false);
+		im.setImage("0002-food.png");
+		itemMenuRepository.save(im);
+		
+		
+		
+		
+	}
+	
+	
 
 }

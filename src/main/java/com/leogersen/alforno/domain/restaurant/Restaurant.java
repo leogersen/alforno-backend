@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -26,6 +27,7 @@ import com.leogersen.alforno.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Getter
@@ -69,8 +71,12 @@ public class Restaurant extends User{
 		inverseJoinColumns = @JoinColumn(name = "restaurant_category_id")
 		
 		)
-
+	
+	@ToString.Exclude
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
+	
+	@OneToMany(mappedBy = "restaurant")
+	private Set<ItemMenu> itensMenu = new HashSet<>(0);
 	
 	public void setLogoFileName() {
 		if (getId() == null) {
