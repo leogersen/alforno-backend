@@ -138,6 +138,17 @@ public class InserDataForTesting {
 		clientRepository.save(c);
 		clients.add(c);
 		
+		
+		c = new Client();
+		c.setName("Jhonny Lima");
+		c.setEmail("j@j.com");
+		c.setPassword(StringUtils.encrypt("123"));
+		c.setCpf("11256477689");
+		c.setPhonenumber("31988733227");
+		c.setCep("31980640");
+		clientRepository.save(c);
+		clients.add(c);
+		
 		Client[] array = new Client[clients.size()];
 		return clients.toArray(array);
 	

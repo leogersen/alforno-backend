@@ -8,33 +8,38 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
     <div class="">
       <img id="logo2" th:src="@{images/af_logo2.png}" alt="">
       <h1>Login</h1>
+      
+      <div id="errorMessage" th:if="${msg != null}">
+		<span th:text="${msg}"></span>
+      </div>
+      
       <form th:action="@{/login}" method="post">
 
         <fieldset>
+        
+        
           <div id="inputUser">
-            <label for="nome"><img id="userImg" th:src="@{images/af_user.png}" alt="User"></label>
-            <input type="text" id="nome" name="nome" placeholder="Usuário"/><br/><br/>
+            <label for="username"><img id="userImg" th:src="@{images/af_user.png}" alt="User"></label>
+            <input type="text" id="nome" name="username" placeholder="E-mail"/><br/><br/>
           </div>
 
           <div id="inputUser">
-            <label for="senha"><img id="userImg" th:src="@{images/af_senha.png}" alt="Senha"></label>
-            <input type="text" id="senha" name="senha" placeholder="Senha"/><br/><br/>
+            <label for="password"><img id="userImg" th:src="@{images/af_senha.png}" alt="Senha"></label>
+            <input type="password" id="senha" name="password" placeholder="Senha"/><br/><br/>
           </div>
 
-        <input type="submit" name="button" value="Entrar" onclick="location.href='clientHome.html';">
+        <input type="submit" name="button" value="Entrar" />
 
         </fieldset>
 
       </form>
       <br>
-      <div id="errorMessage" th:if="${msg != null}">
-		<span th:text="${msg}"></span>
-      </div><br>
       
    <div id="formDiv">
 	<form id="formButton" method="get" th:action="@{/public/client/new}">
       <input id="buttonNew" type="submit" name="newuser" value="Novo Usuário">
     </form>
+    
     <form id="formButton" method="get" th:action="@{/public/restaurant/new}">
         <input id="buttonNew" type="submit" name="newrest" value="Novo Restaurante">
     </form>
