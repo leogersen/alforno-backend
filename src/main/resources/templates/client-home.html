@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+
+<div layout:fragment="content">
+
+<div class="">
+    <h1>É hora de comer!</h1>
+    <form class="" action="" method="post">
+      <fieldset id="fieldSearch">
+        <input id="numero" type="text" name="busca" placeholder="Buscando por...">
+        <input id="buttomLarge" type="button" name="" value="Procurar" onclick="location.href='clientSearch.html';"/>
+
+      </fieldset>
+    </form>
+</div>
+
+<div id="divGeralCat" class="">
+  <div id="divCat">
+    <a onclick="location.href='clientSearch.html';">
+      <img id="catImg" th:src="@{/images/af_category1.png}" alt="">
+      <br/>
+      <span>Hamburguer</span>
+    </a>
+
+  </div>
+
+  <div id="divCat">
+    <a onclick="location.href='clientSearch.html';">
+      <img id="catImg" th:src="@{/images/af_category2.png}" alt="">
+      <br/>
+      <span>Pizza</span>
+    </a>
+
+  </div>
+
+  <div id="divCat">
+    <a onclick="location.href='clientSearch.html';">
+      <img id="catImg" th:src="@{/images/af_category3.png}" alt="">
+      <br/>
+      <span>Mexicana</span>
+    </a>
+
+  </div>
+
+  <div id="divCat">
+    <a onclick="location.href='clientSearch.html';">
+      <img id="catImg" th:src="@{/images/af_category4.png}" alt="">
+      <br/>
+      <span>Bolos & Doces</span>
+    </a>
+
+  </div>
+
+  <div id="divCat">
+    <a onclick="location.href='clientSearch.html';">
+      <img id="catImg" th:src="@{/images/af_category5.png}" alt="">
+      <br/>
+      <span>Japonesa</span>
+    </a>
+
+  </div>
+</div>
+
+<div class="">
+  <h1>Cupons disponíveis</h1>
+  <input type="button" name="cupom" value="10% Hamburguer">
+  <input type="button" name="cupom2" value="15% Pizza">
+
+</div>
+
+    <div class="">
+      <h1>Últimos pedidos</h1>
+      <input type="button" name="" value="#15124 McDonalds" onclick="location.href='clientOrder.html';">
+      <input type="button" name="" value="#15144 Alforno" onclick="location.href='clientOrder.html';">
+      <input type="button" name="" value="#15224 BurgerKing" onclick="location.href='clientOrder.html';">
+    </div>
+
+    <div class="">
+      <h1>Conta</h1>
+      <input type="button" name="" value="Meus dados" th:onclick="'location.href=\''+ @{/client/edit} + '\';'"/>
+      <input type="button" name="" value="Sair" th:onclick="'location.href=\''+ @{/logout} + '\';'"/>
+
+    </div>
+
+
+
+<!-- Footer -->
+
+</body>
+</html>

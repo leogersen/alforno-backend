@@ -33,7 +33,7 @@ public class LoggedUser implements UserDetails {
 			throw new IllegalStateException("O tipo de usuário não é válido");
 		}
 		this.role = role;
-		this.roles = List.of(new SimpleGrantedAuthority("ROLE" + role));
+		this.roles = List.of(new SimpleGrantedAuthority("ROLE_" + role));
 				
 	}
 	

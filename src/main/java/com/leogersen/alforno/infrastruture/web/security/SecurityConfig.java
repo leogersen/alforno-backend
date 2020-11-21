@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
-	public AuthenticationSuccessHandler autheticationSeccesHandler() {
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new AuthenticationSuccessHandlerImpl();
 	}
 	
@@ -27,14 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/login")
 				.failureUrl("/login-error")
-				.successHandler(autheticationSeccesHandler())
+				.successHandler(authenticationSuccessHandler())
 				.permitAll()
 			.and()
-				.logout().logoutUrl("/logout")
+				.logout()
+				.logoutUrl("/logout")
 				.permitAll();
 				
-	
+		}
 	}
-	
 
-}
