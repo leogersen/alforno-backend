@@ -18,50 +18,16 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 </div>
 
 <div id="divGeralCat" class="">
-  <div id="divCat">
+
+
+  <div id="divCat" th:each="category : ${categories}">
     <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/af_category1.png}" alt="">
+      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
       <br/>
-      <span>Hamburguer</span>
+      <span th:text="${category.name}"></span>
     </a>
-
-  </div>
-
-  <div id="divCat">
-    <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/af_category2.png}" alt="">
-      <br/>
-      <span>Pizza</span>
-    </a>
-
-  </div>
-
-  <div id="divCat">
-    <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/af_category3.png}" alt="">
-      <br/>
-      <span>Mexicana</span>
-    </a>
-
-  </div>
-
-  <div id="divCat">
-    <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/af_category4.png}" alt="">
-      <br/>
-      <span>Bolos & Doces</span>
-    </a>
-
-  </div>
-
-  <div id="divCat">
-    <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/af_category5.png}" alt="">
-      <br/>
-      <span>Japonesa</span>
-    </a>
-
-  </div>
+  	</div>
+  
 </div>
 
 <div class="">
