@@ -1,6 +1,8 @@
 package com.leogersen.alforno.application.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.client.ClientRepository;
 import com.leogersen.alforno.domain.restaurant.Restaurant;
 import com.leogersen.alforno.domain.restaurant.RestaurantRepository;
+import com.leogersen.alforno.domain.restaurant.SearchFilter;
 
 @Service
 public class RestaurantService {
@@ -72,5 +75,10 @@ public class RestaurantService {
 			return true;
 		
 }
+	
+	public List<Restaurant> search(SearchFilter filter) {
+		//TODO: Setup Filters
+		return restaurantRepository.findAll();
+	}
 
 }

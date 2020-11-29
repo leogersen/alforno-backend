@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html 
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/client/home}">
+
+
+<div layout:fragment="content">
+
+<!-- Header -->
+			<div class="">
+			    <h1>É hora de comer!</h1>
+			    <form class="" action="" method="post">
+			      <fieldset id="fieldSearch">
+			        <input id="numero" type="text" name="busca" placeholder="Buscando por...">
+			        <input id="buttomLarge" type="button" name="" value="Procurar"/>
+			
+			      </fieldset>
+			    </form>
+			</div>
+					
+			
+		<div id="divCat" th:each="category : ${categories}">
+		    <a onclick="location.href='clientSearch.html';">
+		      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
+		      <br/>
+		      <span th:text="${category.name}"></span>
+		    </a>
+		 </div>
+  						<div>
+  				          
+  						</div>
+  	
+			       <div class="">
+			          <fieldset>
+			          <h1>Resultados</h1>
+			            <span>Filtros</span><br>
+			            <input id="buttonFilter"  type="button" name="" value="Entrega grátis">
+			             <input id="buttonFilter" type="button" name="" value="Menor preço">
+			            <input id="buttonFilter"  type="button" name="" value="Menor taxa">
+			          </fieldset>
+			        </div>
+			
+			    <div id="divRestGeral">
+			          <div id="divRest" th:each="restaurant : ${restaurants}">
+			            <a onclick="location.href='clientRestaurant.html';">
+			              <img id="restImg" th:src="@{/images/logos/} + ${restaurant.logo}" alt="Rest1"><br/>
+			
+			              <span id="restName" th:text="${restaurant.name}"></span><br/>
+			              <span>Categoria de Comida</span><br/>
+			              <span th:text="'Tempo médio de entrega: ' + ${restaurant.deliveryTime} + 'm'"></span><br/>
+			              <span th:text="'Taxa de entrega: ' + 'R$ ' + ${restaurant.deliveryTax}"></span><br/>
+			
+			            </a>
+			          </div>
+			        </div><br/>
+			
+			<div class="">
+			<input id="" type="button" name="" value="Voltar" onclick="location.href='clientHome.html';">
+			</div>
+	</div>
+</body>
+</html>

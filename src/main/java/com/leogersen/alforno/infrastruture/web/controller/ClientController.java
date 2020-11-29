@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.leogersen.alforno.application.service.ClientService;
+import com.leogersen.alforno.application.service.RestaurantService;
 import com.leogersen.alforno.application.service.ValidationException;
 import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.client.ClientRepository;
+import com.leogersen.alforno.domain.restaurant.Restaurant;
 import com.leogersen.alforno.domain.restaurant.RestaurantCategory;
 import com.leogersen.alforno.domain.restaurant.RestaurantCategoryRepository;
+import com.leogersen.alforno.domain.restaurant.SearchFilter;
 import com.leogersen.alforno.util.SecurityUtils;
 
 @Controller
@@ -35,11 +38,15 @@ public class ClientController {
 	@Autowired 
 	private ClientService clientService;
 	
+	@Autowired
+	private RestaurantService restaurantService;
+	
 	@GetMapping(path = "/home")
 	public String home(Model model) {
 		
 		List<RestaurantCategory> categories = restaurantCategoryRepository.findAll(Sort.by("name"));
 		model.addAttribute("categories", categories);
+		model.addAttribute("searchFilter", new SearchFilter());
 		
 		
 		
@@ -78,5 +85,13 @@ public class ClientController {
 		ControllerHelper.setEditMode(model, false);
 		return "client-signup";
 
+	}
+	
+	@GetMapping(path = "/search")
+	public String search(@ModelAttribute("searchFilter") SearchFilter filter, Model model) {
+		List<Restaurant> restaurants = restaurantService.search(filter); 
+		model.addAttribute("restaurants", restaurants);
+		ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
+		return "client-search";
 	}
 }

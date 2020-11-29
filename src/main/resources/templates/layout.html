@@ -13,7 +13,13 @@
     <header>
       <div id="title">
         <span id="auxiliar"></span>
+        <a th:href="${link} == null ? @{/} : ${link}">
         <img id="letterWhite" th:src="@{/images/af_letterWhite.png}" alt="Alforno"/>
+        </a>
+      </div>
+            <div id="divUser" th:if="${#authentication.principal != 'anonymousUser'}">
+       <span th:text="'Olá, ' + ${#authentication.principal.user.name} + '!'"></span>
+        <br/>
       </div>
     </header>
     <br/><br/>
