@@ -50,16 +50,13 @@ public class ClientService {
 		
 		if (client != null) { 
 			if (id == null){
-		     return false;	
-		     
+		     return false;
 			}
-			
 			if(!client.getId().equals(id)) {
 				return false;
-			} 
+			}
 				
 		}
-			
 			return true;
 		
 }

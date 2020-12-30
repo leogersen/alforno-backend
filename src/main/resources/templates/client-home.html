@@ -4,32 +4,34 @@ xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/client/home}">
 
 
-<div layout:fragment="content">
-
-<div class="">
-    <h1>É hora de comer!</h1>
-    <form class="" th:action="@{/client/search}" method="get" th:object="${searchFilter}">
-      <fieldset id="fieldSearch">
-        <input id="numero" type="text" th:field="*{text}" name="busca" placeholder="Buscando por...">
-        <input id="buttomLarge" type="submit" value="Procurar"/>
-
-      </fieldset>
-    </form>
-</div>
-
-<div id="divGeralCat" class="">
+	<div layout:fragment="content">
+	<form id="form" th:action="@{/client/search}" method="get" th:object="${searchFilter}">
+		<input id="searchType" type="hidden" th:field="*{searchType}">
+		<input id="categoryId" type="hidden" th:field="*{categoryId}">
 
 
-  <div id="divCat" th:each="category : ${categories}">
-    <a onclick="location.href='clientSearch.html';">
-      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
-      <br/>
-      <span th:text="${category.name}"></span>
-    </a>
-  	</div>
-  
-</div>
-
+		<div class="">
+		    <h1>É hora de comer!</h1>
+		   
+		      <fieldset id="fieldSearch">
+		        <input id="numero" type="text" th:field="*{text}" name="busca" placeholder="Buscando por...">
+		        <input id="buttomLarge" type="button" value="Procurar" onclick="searchRest(null);"/>
+		      </fieldset>
+		</div>
+		
+		<div id="divGeralCat" class="">
+		
+		
+		  <div id="divCat" th:each="category : ${categories}">
+		    <a href="#" th:onclick="'searchRest(' + ${category.id} + ');'">
+		      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
+		      <br/>
+		      <span th:text="${category.name}"></span>
+		    </a>
+		  	</div>
+		  
+		</div>
+	</form>
 <div class="">
   <h1>Cupons disponíveis</h1>
   <input type="button" name="cupom" value="10% Hamburguer">

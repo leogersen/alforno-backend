@@ -7,55 +7,64 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 <div layout:fragment="content">
 
 <!-- Header -->
-			<div class="">
-			    <h1>É hora de comer!</h1>
-			    <form class="" action="" method="post">
-			      <fieldset id="fieldSearch">
-			        <input id="numero" type="text" name="busca" placeholder="Buscando por...">
-			        <input id="buttomLarge" type="button" name="" value="Procurar"/>
-			
-			      </fieldset>
-			    </form>
-			</div>
-					
-			
-		<div id="divCat" th:each="category : ${categories}">
-		    <a onclick="location.href='clientSearch.html';">
-		      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
-		      <br/>
-		      <span th:text="${category.name}"></span>
-		    </a>
-		 </div>
-  						<div>
-  				          
-  						</div>
-  	
-			       <div class="">
+				<form id="form" th:action="@{/client/search}" method="get" th:object="${searchFilter}">
+					<input id="searchType" type="hidden" th:field="*{searchType}"/>
+					<input id="categoryId" type="hidden" th:field="*{categoryId}"/>
+
+
+					<div class="">
+						<h1>É hora de comer!</h1>
+
+						<fieldset id="fieldSearch">
+							<input id="numero" type="text" th:field="*{text}" name="busca" placeholder="Buscando por...">
+							<input id="buttomLarge" type="button" value="Procurar" onclick="searchRest(null);"/>
+						</fieldset>
+					</div>
+
+					<div id="divGeralCat" class="">
+						<div id="divCat" th:each="category : ${categories}">
+							<a href="#" th:onclick="'searchRest(' + ${category.id} + ');'">
+							<img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
+							<br/>
+							<span th:text="${category.name}"></span>
+							</a>
+						</div>
+
+					</div>
+					<div class="">
 			          <fieldset>
 			          <h1>Resultados</h1>
-			            <span>Filtros</span><br>
-			            <input id="buttonFilter"  type="button" name="" value="Entrega grátis">
-			             <input id="buttonFilter" type="button" name="" value="Menor preço">
-			            <input id="buttonFilter"  type="button" name="" value="Menor taxa">
+						  <span>Filtros</span><br>
+						  <input type="button" name="" value="Entrega grátis" th:id="*{freeTax} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('FreeTax')"/>
+						  <input type="button" name="" value="Menor tempo" th:id="*{order.name() == 'Time'} and *{asc} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('LessTime')" />
+						  <input type="button" name="" value="Menor taxa" th:id="*{order.name() == 'Tax'} and *{asc} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('LessTax')" />
+			            
+						  <input type="hidden" id="freeTax" th:field="*{freeTax}" />
+						  <input type="hidden" id="order" th:field="*{order}" />
+						  <input type="hidden" id="asc" th:field="*{asc}" />
+						  <input type="hidden" id="cmd" name="cmd" />
 			          </fieldset>
 			        </div>
-			
+				</form>
+
 			    <div id="divRestGeral">
 			          <div id="divRest" th:each="restaurant : ${restaurants}">
 			            <a onclick="location.href='clientRestaurant.html';">
 			              <img id="restImg" th:src="@{/images/logos/} + ${restaurant.logo}" alt="Rest1"><br/>
-			
+
 			              <span id="restName" th:text="${restaurant.name}"></span><br/>
-			              <span>Categoria de Comida</span><br/>
+			              <span th:text="${restaurant.categoriesAsText}"></span><br/>
 			              <span th:text="'Tempo médio de entrega: ' + ${restaurant.deliveryTime} + 'm'"></span><br/>
-			              <span th:text="'Taxa de entrega: ' + 'R$ ' + ${restaurant.deliveryTax}"></span><br/>
-			
+			              <span th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurant.deliveryTax)}"></span><br/>
+
 			            </a>
 			          </div>
 			        </div><br/>
-			
+<div th:if="${restaurants.size() == 0}">
+  <span>Nenhum restaurante encontrado</span><br/><br/>
+</div>
 			<div class="">
-			<input id="" type="button" name="" value="Voltar" onclick="location.href='clientHome.html';">
+			<input id="" type="button" name="" value="Voltar" th:onclick="'location.href=\'' + @{/client/home} + '\' ; '">
 			</div>
 	</div>
 </body>

@@ -19,13 +19,13 @@ import lombok.Setter;
 @Entity
 public class Client extends User{
 	
-	@NotBlank(message = "O campo CPF não pode estar vazio")
-	@Pattern(regexp = "[0-9]{11}", message = "O CPF possui formato inválido")
+	@NotBlank(message = "O campo CPF nÃ£o pode estar vazio")
+	@Pattern(regexp = "[0-9]{11}", message = "O CPF possui formato invï¿½lido")
 	@Column(length = 11, nullable = false)
 	private String cpf;
 	
-	@NotBlank(message = "O campo CEP não pode estar vazio")
-	@Pattern(regexp = "[0-9]{8}", message = "O CEP possui formato inválido")
+	@NotBlank(message = "O campo CEP nÃ£o pode estar vazio")
+	@Pattern(regexp = "[0-9]{8}", message = "O CEP possui formato invï¿½lido")
 	@Column(length = 8)
 	private String cep;
 	

@@ -9,10 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.leogersen.alforno.application.service.ClientService;
 import com.leogersen.alforno.application.service.RestaurantService;
@@ -88,10 +85,20 @@ public class ClientController {
 	}
 	
 	@GetMapping(path = "/search")
-	public String search(@ModelAttribute("searchFilter") SearchFilter filter, Model model) {
+	public String search(
+			@ModelAttribute("searchFilter") SearchFilter filter,
+			@RequestParam(value = "cmd", required = false) String command,
+			Model model) {
+
+		filter.processFilter(command);
+
 		List<Restaurant> restaurants = restaurantService.search(filter); 
 		model.addAttribute("restaurants", restaurants);
+		
 		ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
+
+		model.addAttribute("searchFilter", filter);
+		
 		return "client-search";
 	}
 }

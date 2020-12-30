@@ -1,6 +1,7 @@
 package com.leogersen.alforno.application.service;
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.leogersen.alforno.domain.client.ClientRepository;
 import com.leogersen.alforno.domain.restaurant.Restaurant;
 import com.leogersen.alforno.domain.restaurant.RestaurantRepository;
 import com.leogersen.alforno.domain.restaurant.SearchFilter;
+import com.leogersen.alforno.domain.restaurant.SearchFilter.SearchType;
 
 @Service
 public class RestaurantService {
@@ -77,8 +79,34 @@ public class RestaurantService {
 }
 	
 	public List<Restaurant> search(SearchFilter filter) {
-		//TODO: Setup Filters
-		return restaurantRepository.findAll();
+
+		List<Restaurant> restaurants;
+
+		if (filter.getSearchType() == SearchType.Text) {
+			restaurants = restaurantRepository.findByNameIgnoreCaseContaining(filter.getText());
+
+		} else if (filter.getSearchType() == SearchType.Category) {
+			restaurants = restaurantRepository.findByCategories_Id(filter.getCategoryId());
+
+		} else {
+			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado");
+		}
+
+		Iterator<Restaurant> it = restaurants.iterator();
+
+		while (it.hasNext()) {
+			Restaurant restaurant = it.next();
+			double deliveryTax = restaurant.getDeliveryTax().doubleValue();
+
+			if (filter.isFreeTax() && deliveryTax > 0) {
+				it.remove();
+			}
+		}
+
+
+
+		return restaurants;
+
 	}
 
 }

@@ -2,10 +2,12 @@ package com.leogersen.alforno.domain.restaurant;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,11 +20,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.leogersen.alforno.util.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.leogersen.alforno.domain.user.User;
 import com.leogersen.alforno.infrastruture.web.validator.UploadConstraint;
-import com.leogersen.alforno.util.FileType;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -64,7 +66,7 @@ public class Restaurant extends User{
 	@Max(120)
 	private Integer deliveryTime;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		name = "restaurant_has_category",
 		joinColumns = @JoinColumn(name = "restaurant_id"),
@@ -86,5 +88,29 @@ public class Restaurant extends User{
 		
 		this.logo = String.format("af_restaurant_%04d.%s", getId(), FileType.of(logoFile.getContentType()).getExtension());
 	}
+	
+	public String getCategoriesAsText() {
+		Set<String> strings = new LinkedHashSet<>();
+		
+		for(RestaurantCategory category : categories) {
+			strings.add(category.getName());
+			
+			
+		}
+		return StringUtils.concatenate(strings);
+		
+	}
+
+	public Integer deliveryTimeCalculator(String cep) {
+
+	    if (cep.equals(SecurityUtils.loggedClient().getCep())){
+	        return deliveryTime;
+        } else {
+	        throw new IllegalArgumentException("Infelizmente o restaurante não entrega para o seu CEP");
+        }
+
+
+
+    }
 
 }
