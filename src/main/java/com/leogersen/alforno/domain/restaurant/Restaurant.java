@@ -78,7 +78,7 @@ public class Restaurant extends User{
 	private Set<RestaurantCategory> categories = new HashSet<>(0);
 	
 	@OneToMany(mappedBy = "restaurant")
-	private Set<ItemMenu> itensMenu = new HashSet<>(0);
+	private Set<ItemMenu> itemsMenu = new HashSet<>(0);
 	
 	public void setLogoFileName() {
 		if (getId() == null) {

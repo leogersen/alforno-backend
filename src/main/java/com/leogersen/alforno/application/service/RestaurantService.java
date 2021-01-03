@@ -4,15 +4,14 @@ package com.leogersen.alforno.application.service;
 import java.util.Iterator;
 import java.util.List;
 
+import com.leogersen.alforno.domain.restaurant.*;
+import com.leogersen.alforno.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.client.ClientRepository;
-import com.leogersen.alforno.domain.restaurant.Restaurant;
-import com.leogersen.alforno.domain.restaurant.RestaurantRepository;
-import com.leogersen.alforno.domain.restaurant.SearchFilter;
 import com.leogersen.alforno.domain.restaurant.SearchFilter.SearchType;
 
 @Service
@@ -103,6 +102,8 @@ public class RestaurantService {
 			}
 		}
 
+        RestaurantComparator comparator = new RestaurantComparator(filter, SecurityUtils.loggedClient().getCep());
+        restaurants.sort(comparator);
 
 
 		return restaurants;

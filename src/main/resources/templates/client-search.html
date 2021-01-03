@@ -35,9 +35,9 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 			          <fieldset>
 			          <h1>Resultados</h1>
 						  <span>Filtros</span><br>
-						  <input type="button" name="" value="Entrega grátis" th:id="*{freeTax} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('FreeTax')"/>
-						  <input type="button" name="" value="Menor tempo" th:id="*{order.name() == 'Time'} and *{asc} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('LessTime')" />
-						  <input type="button" name="" value="Menor taxa" th:id="*{order.name() == 'Tax'} and *{asc} ? 'hFilterButton' : 'buttonFilter'" onclick="setCmd('LessTax')" />
+						  <input type="button" name="" value="Entrega grátis" th:id="*{freeTax} ? 'sbuttonFilter' : 'buttonFilter'" onclick="setCmd('FreeTax')"/>
+						  <input type="button" name="" value="Menor tempo" th:id="*{order.name() == 'Time'} and *{asc} ? 'sbuttonFilter' : 'buttonFilter'" onclick="setCmd('LessTime')" />
+						  <input type="button" name="" value="Menor taxa" th:id="*{order.name() == 'Tax'} and *{asc} ? 'sbuttonFilter' : 'buttonFilter'" onclick="setCmd('LessTax')" />
 			            
 						  <input type="hidden" id="freeTax" th:field="*{freeTax}" />
 						  <input type="hidden" id="order" th:field="*{order}" />
@@ -49,7 +49,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 
 			    <div id="divRestGeral">
 			          <div id="divRest" th:each="restaurant : ${restaurants}">
-			            <a onclick="location.href='clientRestaurant.html';">
+			            <a th:href="@{/client/restaurant} + '?restaurantId=' + ${restaurant.id}">
 			              <img id="restImg" th:src="@{/images/logos/} + ${restaurant.logo}" alt="Rest1"><br/>
 
 			              <span id="restName" th:text="${restaurant.name}"></span><br/>

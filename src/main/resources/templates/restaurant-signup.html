@@ -89,7 +89,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
 
    		<label for="categoria">Categoria: </label>
-          <select name="category" id="categoria" th:field="*{categories}">
+          <select name="category" id="categoria" th:field="*{categories}" multiple>
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
           </select><br/><br/><br/>
           

@@ -29,7 +29,7 @@ public class RestaurantComparator implements Comparator<Restaurant> {
             throw new IllegalStateException("O valor da ordenação " + filter.getOrder() + " não é válido");
         }
 
-        return filter.isAsc() ? result - 1 : result;
+        return filter.isAsc() ? result : -result;
 
     }
 }

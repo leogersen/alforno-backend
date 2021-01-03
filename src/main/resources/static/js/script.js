@@ -28,4 +28,9 @@ function setCmd(cmd) {
     document.getElementById("form").submit();
 }
 
+function filterMenu(category) {
+    document.getElementById("category").value = category;
+    document.getElementById("filterForm").submit();
+}
+
 

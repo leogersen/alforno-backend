@@ -62,8 +62,9 @@ public class InserDataForTesting {
 		r.setDeliveryTax(BigDecimal.valueOf(3.2));
 		r.setPhonenumber("31988733237");
 		r.getCategories().add(lanchesCategory);
+        r.getCategories().add(pizzaCategory);
 		r.setLogo("0001.restaurant.png");
-		r.setDeliveryTime(30);
+		r.setDeliveryTime(10);
 		r.setCep("31980540");
 		restaurantRepository.save(r);
 		restaurants.add(r);
@@ -73,11 +74,11 @@ public class InserDataForTesting {
 		r.setEmail("contact@burgerking.com");
 		r.setPassword(StringUtils.encrypt("123"));
 		r.setCnpj("12345678901235");
-		r.setDeliveryTax(BigDecimal.valueOf(3.2));
+		r.setDeliveryTax(BigDecimal.valueOf(1.5));
 		r.setPhonenumber("31988733238");
 		r.getCategories().add(lanchesCategory);
 		r.setLogo("0002.restaurant.png");
-		r.setDeliveryTime(30);
+		r.setDeliveryTime(20);
 		r.setCep("31980540");
 		restaurantRepository.save(r);
 		restaurants.add(r);
@@ -87,7 +88,7 @@ public class InserDataForTesting {
 		r.setEmail("contact@bobs.com");
 		r.setPassword(StringUtils.encrypt("123"));
 		r.setCnpj("12345678901236");
-		r.setDeliveryTax(BigDecimal.valueOf(3.2));
+		r.setDeliveryTax(BigDecimal.valueOf(0));
 		r.setPhonenumber("31988733239");
 		r.getCategories().add(lanchesCategory);
 		r.setLogo("0003.restaurant.png");
@@ -101,11 +102,11 @@ public class InserDataForTesting {
 		r.setEmail("contact@pizzahut.com");
 		r.setPassword(StringUtils.encrypt("123"));
 		r.setCnpj("12345678901237");
-		r.setDeliveryTax(BigDecimal.valueOf(3.2));
+		r.setDeliveryTax(BigDecimal.valueOf(2.5));
 		r.setPhonenumber("31988733230");
 		r.getCategories().add(pizzaCategory);
 		r.setLogo("0004.restaurant.png");
-		r.setDeliveryTime(30);
+		r.setDeliveryTime(40);
 		r.setCep("31980540");
 		restaurantRepository.save(r);
 		restaurants.add(r);
@@ -115,11 +116,11 @@ public class InserDataForTesting {
 		r.setEmail("contact@temakinow.com");
 		r.setPassword(StringUtils.encrypt("123"));
 		r.setCnpj("12345678901231");
-		r.setDeliveryTax(BigDecimal.valueOf(3.2));
+		r.setDeliveryTax(BigDecimal.valueOf(0));
 		r.setPhonenumber("31988733231");
 		r.getCategories().add(japonesaCategory);
 		r.setLogo("0005.restaurant.png");
-		r.setDeliveryTime(30);
+		r.setDeliveryTime(50);
 		r.setCep("31980540");
 		restaurantRepository.save(r);
 		restaurants.add(r);
@@ -170,17 +171,17 @@ public class InserDataForTesting {
 		im.setName("Chiken Burger");
 		im.setPrice(BigDecimal.valueOf(17.8));
 		im.setRestaurant(restaurants[0]);
-		im.setHighlight(false);
+		im.setHighlight(true);
 		im.setImage("0001-food.png");
 		itemMenuRepository.save(im);
 		
 		
 		im = new ItemMenu();
-		im.setCategory("Lanches");
+		im.setCategory("Pizzas");
 		im.setDescription("Delicioso sanduíche de frango com legumes.");
 		im.setName("Super Burger");
 		im.setPrice(BigDecimal.valueOf(17.8));
-		im.setRestaurant(restaurants[1]);
+		im.setRestaurant(restaurants[0]);
 		im.setHighlight(false);
 		im.setImage("0002-food.png");
 		itemMenuRepository.save(im);

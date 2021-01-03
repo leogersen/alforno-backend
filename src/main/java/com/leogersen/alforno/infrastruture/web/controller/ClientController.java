@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.leogersen.alforno.domain.restaurant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,6 @@ import com.leogersen.alforno.application.service.RestaurantService;
 import com.leogersen.alforno.application.service.ValidationException;
 import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.client.ClientRepository;
-import com.leogersen.alforno.domain.restaurant.Restaurant;
-import com.leogersen.alforno.domain.restaurant.RestaurantCategory;
-import com.leogersen.alforno.domain.restaurant.RestaurantCategoryRepository;
-import com.leogersen.alforno.domain.restaurant.SearchFilter;
 import com.leogersen.alforno.util.SecurityUtils;
 
 @Controller
@@ -31,6 +28,12 @@ public class ClientController {
 	
 	@Autowired
 	private RestaurantCategoryRepository restaurantCategoryRepository;
+
+	@Autowired
+    private ItemMenuRepository itemMenuRepository;
+
+	@Autowired
+    private RestaurantRepository restaurantRepository;
 	
 	@Autowired 
 	private ClientService clientService;
@@ -100,5 +103,34 @@ public class ClientController {
 		model.addAttribute("searchFilter", filter);
 		
 		return "client-search";
+	}
+
+	@GetMapping(path = "/restaurant")
+    public String viewRestaurant(
+            @RequestParam("restaurantId") Integer restaurantId,
+            @RequestParam(value = "category", required = false) String category,
+            Model model) {
+
+	        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+	        model.addAttribute("restaurant", restaurant);
+	        model.addAttribute("cep", SecurityUtils.loggedClient().getCep());
+
+	        List<String> categories = itemMenuRepository.findCategories(restaurantId);
+	        model.addAttribute("categories", categories);
+
+	        List<ItemMenu> itemsMenuHighlight;
+            List<ItemMenu> itemsMenuNotHighlight;
+
+            if(category == null) {
+                itemsMenuHighlight = itemMenuRepository.findByRestaurant_IdAndHighlightOrderByName(restaurantId, true);
+                itemsMenuNotHighlight = itemMenuRepository.findByRestaurant_IdAndHighlightOrderByName(restaurantId, false);
+            }else {
+                itemsMenuHighlight = itemMenuRepository.findByRestaurant_IdAndHighlightAndCategoryOrderByName(restaurantId, true, category);
+                itemsMenuNotHighlight = itemMenuRepository.findByRestaurant_IdAndHighlightAndCategoryOrderByName(restaurantId, false, category);
+            }
+        model.addAttribute("itemsMenuHighlight", itemsMenuHighlight);
+        model.addAttribute("itemsMenuNotHighlight", itemsMenuNotHighlight);
+
+	    return "client-restaurant";
 	}
 }
