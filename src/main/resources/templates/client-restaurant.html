@@ -23,6 +23,7 @@
     <legend>Filtros</legend>
       <div th:each="category : ${categories}">
         <input
+                th:id="${category == selectedCategory} ? 'sInput' : ''"
                 type="button"
                 th:value="${category}"
                 th:data-category = "${category}"

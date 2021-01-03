@@ -130,6 +130,7 @@ public class ClientController {
             }
         model.addAttribute("itemsMenuHighlight", itemsMenuHighlight);
         model.addAttribute("itemsMenuNotHighlight", itemsMenuNotHighlight);
+        model.addAttribute("selectedCategory", category);
 
 	    return "client-restaurant";
 	}
