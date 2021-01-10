@@ -21,6 +21,10 @@ public class ItemOrder {
 
     private BigDecimal price;
 
+    public BigDecimal getCalculatedPrice() {
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
 
 
 }

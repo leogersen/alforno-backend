@@ -19,6 +19,10 @@
       </div>
             <div id="divUser" th:if="${#authentication.principal != 'anonymousUser'}">
        <span th:text="'Olá, ' + ${#authentication.principal.user.name} + '!'"></span>
+
+                <div th:if="${session.cart != null}">
+                    <a th:href="@{/client/cart/view}"><img th:src="@{/images/af_cart.png}" id="cartImg"></a>
+                </div>
         <br/>
       </div>
     </header>

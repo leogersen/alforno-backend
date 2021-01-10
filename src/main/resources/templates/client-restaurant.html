@@ -51,9 +51,9 @@
     <br/>
       <form class="" action="get" th:action="@{/client/cart/add}">
           <input type="hidden" name="itemId" th:value="${item.id}" />
-      <label for="quantidade">Quantidade: </label>
+      <label for="quantity">Quantidade: </label>
       <br/>
-      <select name="quantidade" id="quantidade">
+      <select name="quantity" id="quantity">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -63,7 +63,7 @@
       <br/><br/>
       Observações:
       <br/>
-      <textarea name="name" rows="8" cols="80"></textarea>
+      <textarea name="obs" rows="8" cols="80"></textarea>
       <br><br>
         <input id="buttomLarge" type="submit" name="" value="Adicionar ao carrinho" />
     </form>
@@ -85,11 +85,11 @@
         <br/>
         <span th:text="${#numbers.formatCurrency(item.price)}"></span>
         <br/>
-        <form class="" action="get" th:action="@{/client/cart/add}">
+        <form action="get" th:action="@{/client/cart/add}">
             <input type="hidden" name="itemId" th:value="${item.id}" />
-            <label for="quantidade">Quantidade: </label>
+            <label for="quantity">Quantidade: </label>
             <br/>
-            <select name="quantidade" id="quantidade">
+            <select name="quantity" id="quantity">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -101,7 +101,7 @@
             <br/>
             <textarea name="obs" rows="8" cols="80"></textarea>
             <br><br>
-            <input id="buttomLarge" type="submit" name="" value="Adicionar ao carrinho" />
+            <input id="buttomLarge" type="submit" value="Adicionar ao carrinho" />
         </form>
     </div>
 

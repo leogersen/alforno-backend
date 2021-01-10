@@ -1,10 +1,15 @@
 package com.leogersen.alforno.domain.order;
 
 import com.leogersen.alforno.domain.restaurant.*;
+import lombok.*;
 
+import java.io.*;
+import java.math.*;
 import java.util.*;
 
-public class Cart {
+@SuppressWarnings("serial")
+@Getter
+public class Cart implements Serializable {
 
     private List<ItemOrder> items = new ArrayList<>();
     private Restaurant restaurant;
@@ -39,7 +44,7 @@ public class Cart {
     }
 
     public void removeItem(ItemMenu itemMenu) {
-        for (Iterator<ItemOrder> iterator = items.iterator(); iterator.hasNext();) {
+        for (Iterator<ItemOrder> iterator = items.iterator(); iterator.hasNext(); ) {
             ItemOrder itemOrder = iterator.next();
             if (itemOrder.getItemMenu().getId().equals(itemMenu.getId())) {
                 iterator.remove();
@@ -51,14 +56,40 @@ public class Cart {
         }
     }
 
-    private boolean exists(ItemMenu itemMenu){
-        for(ItemOrder itemOrder : items) {
-            if(itemOrder.getItemMenu().getId().equals(itemMenu.getId())) {
+    private boolean exists(ItemMenu itemMenu) {
+        for (ItemOrder itemOrder : items) {
+            if (itemOrder.getItemMenu().getId().equals(itemMenu.getId())) {
                 return true;
             }
         }
         return false;
 
+    }
+
+    public BigDecimal getTotalPrice(boolean addDeliveryTax) {
+
+        BigDecimal sum = BigDecimal.ZERO;
+
+        for (ItemOrder item : items) {
+            sum = sum.add(item.getCalculatedPrice());
+        }
+
+        if (addDeliveryTax) {
+            sum = sum.add(restaurant.getDeliveryTax());
+
+
+        }
+        return sum;
+
+    }
+
+    public void clear() {
+        items.clear();
+        restaurant = null;
+    }
+
+    public boolean empty() {
+        return items.size() == 0;
     }
 
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/client/home}">
+
+
+<div layout:fragment="content">
+
+    <div id="errorMessage" th:if="${msg != null}">
+        <span th:text="${msg}"></span>
+    </div>
+
+
+        <div class="">
+          <h1>SEU PEDIDO</h1>
+          <img th:if="${cart.restaurant != null}" th:src="@{/images/logos/} + ${cart.restaurant.logo}" alt="Logo" id="restImg">
+        </div>
+        <br/><br/>
+
+        <div th:each="item : ${cart.items}">
+          <span th:text="${item.itemMenu.name}"></span><br/><br/>
+          <span th:text="'Qty:' + ${item.quantity}"></span><br/><br/>
+          <span th:if="${item.obs} != ''" th:text="${item.obs}"></span><br/><br/>
+          <span th:text="${#numbers.formatCurrency(item.price)}"></span><br/><br/>
+          <input id="buttomLarge" type="button" value="Remover" th:onclick="'location.href=\'' + @{/client/cart/remove} + '?itemId=' + ${item.itemMenu.id} + '\';'" />
+        </div>
+        <br/><br/>
+
+    <div th:if="${cart.empty()}">
+        <span>O carrinho está vazio.</span><br/>
+    </div>
+
+    <div th:if="!${cart.empty()}">
+
+
+
+                <div class="">
+                  <span th:text="${#numbers.formatCurrency(cart.restaurant.deliveryTax)}"></span>
+                  <span></span>
+                </div>
+                  <br/><br/>
+
+                <div >
+                  <span>Total</span>
+                    <span th:text="${#numbers.formatCurrency(cart.getTotalPrice(true))}"></span>
+                </div>
+                <br/><br/>
+
+
+                  <span>Cartão de Crédito</span><br>
+                <div id="divInputCart">
+                  <input id="inputCart" type="text" onkeypress="return isNumberKey(event)">
+                </div>
+
+
+                <div class="">
+                  <input type="button" name="" value="Enviar pedido">
+                  <input type="button" name="" value="Voltar" onclick="location.href='clientHome.html';">
+                </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+
+</body>
+</html>
