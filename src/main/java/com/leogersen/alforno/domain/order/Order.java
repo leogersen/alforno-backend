@@ -76,6 +76,6 @@ public class Order implements Serializable {
     @NotNull
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "id.order")
+    @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER)
     private Set<ItemOrder> items;
 }
