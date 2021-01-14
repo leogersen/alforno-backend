@@ -167,7 +167,7 @@ public class InserDataForTesting {
 	private void itensMenu(Restaurant[] restaurants) {
 		ItemMenu im = new ItemMenu();
 		im.setCategory("Lanches");
-		im.setDescription("Delicioso sanduíche de frango com legumes.");
+		im.setDescription("Delicioso sanduÃ­che de frango com legumes.");
 		im.setName("Chiken Burger");
 		im.setPrice(BigDecimal.valueOf(17.8));
 		im.setRestaurant(restaurants[0]);
@@ -178,7 +178,7 @@ public class InserDataForTesting {
 		
 		im = new ItemMenu();
 		im.setCategory("Pizzas");
-		im.setDescription("Delicioso sanduíche de frango com legumes.");
+		im.setDescription("Delicioso sanduÃ­che de frango com legumes.");
 		im.setName("Super Burger");
 		im.setPrice(BigDecimal.valueOf(17.8));
 		im.setRestaurant(restaurants[0]);

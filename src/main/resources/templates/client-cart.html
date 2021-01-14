@@ -46,18 +46,18 @@
                 </div>
                 <br/><br/>
 
+                <form method="post" th:action="@{/client/payment/pay}">
+                    <span>Cartão de Crédito</span><br>
+                    <div id="divInputCart">
+                        <input name="numCart" id="inputCart" type="text" onkeypress="return isNumberKey(event)">
+                    </div>
 
-                  <span>Cartão de Crédito</span><br>
-                <div id="divInputCart">
-                  <input id="inputCart" type="text" onkeypress="return isNumberKey(event)">
-                </div>
 
-
-                <div class="">
-                  <input type="button" name="" value="Enviar pedido">
-                  <input type="button" name="" value="Voltar" onclick="location.href='clientHome.html';">
-                </div>
-
+                    <div class="">
+                        <input type="submit" name="" value="Enviar pedido">
+                        <input type="button" name="" value="Voltar" th:onclick="'location.href=\'' + @{/client/home} + '\' ; '">
+                    </div>
+                </form>
     </div>
 
 </div>

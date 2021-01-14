@@ -42,7 +42,7 @@ public class CartController {
         try {
             cart.addItem(itemMenu, quantity, obs);
         } catch (RestaurantDifferentException e) {
-            model.addAttribute("msg", "Não é possível misturar comidas de restaurantes diferentes");
+            model.addAttribute("msg", "NÃ£o Ã© possÃ­vel misturar comidas de restaurantes diferentes");
         }
 
         return "client-cart";
