@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.leogersen.alforno.domain.order.*;
 import com.leogersen.alforno.domain.restaurant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -34,6 +35,9 @@ public class ClientController {
 
 	@Autowired
     private RestaurantRepository restaurantRepository;
+
+	@Autowired
+    private OrderRepository orderRepository;
 	
 	@Autowired 
 	private ClientService clientService;
@@ -47,6 +51,11 @@ public class ClientController {
 		List<RestaurantCategory> categories = restaurantCategoryRepository.findAll(Sort.by("name"));
 		model.addAttribute("categories", categories);
 		model.addAttribute("searchFilter", new SearchFilter());
+
+		List<Order> orders =  orderRepository.listOfOrders(SecurityUtils.loggedClient().getId());
+		model.addAttribute("orders", orders);
+
+
 		
 		
 		

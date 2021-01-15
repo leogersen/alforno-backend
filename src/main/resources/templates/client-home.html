@@ -32,26 +32,30 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 		  
 		</div>
 	</form>
-<div class="">
-  <h1>Cupons disponíveis</h1>
-  <input type="button" name="cupom" value="10% Hamburguer">
-  <input type="button" name="cupom2" value="15% Pizza">
+                <div class="">
+                  <h1>Cupons disponíveis</h1>
+                  <input type="button" name="cupom" value="10% Hamburguer">
+                  <input type="button" name="cupom2" value="15% Pizza">
 
-</div>
+                </div>
 
-    <div class="">
-      <h1>Últimos pedidos</h1>
-      <input type="button" name="" value="#15124 McDonalds" onclick="location.href='clientOrder.html';">
-      <input type="button" name="" value="#15144 Alforno" onclick="location.href='clientOrder.html';">
-      <input type="button" name="" value="#15224 BurgerKing" onclick="location.href='clientOrder.html';">
-    </div>
+            <div>
+            <h1>Últimos pedidos</h1>
+                <div th:each="order : ${orders}">
+                  <input type="button" name="" th:value="${order.formattedId} + ' ' + ${order.restaurant.name}"
+                         th:onclick="'location.href=\''+ @{/client/order/view} + '?orderId=' + ${order.id} + '\';'">
+                </div>
 
-    <div class="">
-      <h1>Conta</h1>
-      <input type="button" name="" value="Meus dados" th:onclick="'location.href=\''+ @{/client/edit} + '\';'"/>
-      <input type="button" name="" value="Sair" th:onclick="'location.href=\''+ @{/logout} + '\';'"/>
+                </div>
 
-    </div>
+            <span th:if="${orders.size()} == 0">Você ainda não fez nenhum pedido.</span>
+
+                <div class="">
+                  <h1>Conta</h1>
+                  <input type="button" name="" value="Meus dados" th:onclick="'location.href=\''+ @{/client/edit} + '\';'"/>
+                  <input type="button" name="" value="Sair" th:onclick="'location.href=\''+ @{/logout} + '\';'"/>
+
+                </div>
 
 
 

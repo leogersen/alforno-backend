@@ -16,6 +16,9 @@ public class CartController {
     @Autowired
     private ItemMenuRepository itemMenuRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     @ModelAttribute("cart")
     public Cart cart() {
 
@@ -66,7 +69,24 @@ public class CartController {
 
         return "client-cart";
     }
-	
+
+    @GetMapping(path = "/redoCart")
+    public String redoCart(
+            @RequestParam("orderId") Integer orderId,
+            @ModelAttribute("cart") Cart cart,
+            Model model){
+
+        Order order = orderRepository.findById(orderId).orElseThrow();
+
+        cart.clear();
+
+        for (ItemOrder itemOrder : order.getItems()) {
+            cart.addItem(itemOrder);
+        }
+
+        return"client-cart";
+    }
+
 
 
 }

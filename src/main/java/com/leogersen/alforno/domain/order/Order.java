@@ -78,4 +78,8 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER)
     private Set<ItemOrder> items;
+
+    public  String getFormattedId() {
+        return String.format("#%04d", id);
+    }
 }

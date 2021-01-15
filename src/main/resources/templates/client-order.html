@@ -38,7 +38,7 @@
         </div>
         <br/><br/>
 
-        <input id="buttomLarge" type="button" name="" value="Refazer pedido"><br>
+        <input id="buttomLarge" type="button" name="" value="Refazer pedido" th:onclick="'location.href=\'' + @{/client/cart/redoCart} + '?orderId=' + ${order.id} + '\' ; '"><br>
         <input id="buttomLarge" type="button" value="Voltar" th:onclick="'location.href=\'' + @{/client/home} + '\' ; '">
 
 
