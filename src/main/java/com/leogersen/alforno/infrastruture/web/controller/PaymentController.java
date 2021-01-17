@@ -24,10 +24,17 @@ public class PaymentController {
             SessionStatus sessionStatus,
             Model model) {
 
-        Order order = orderService.createAndPay(cart, numCart);
-        sessionStatus.setComplete();
+        try {
+            Order order = orderService.createAndPay(cart, numCart);
+            sessionStatus.setComplete();
+            return "redirect:/client/order/view?orderId=" + order.getId();
 
-        return "redirect:/client/order/view?orderId=" + order.getId();
+        } catch (PaymentException e) {
+            model.addAttribute("msg", e.getMessage());
+            return "client-cart";
+
+        }
+
 
 
     }
