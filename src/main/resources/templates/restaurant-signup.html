@@ -99,19 +99,20 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
       	<div id="errorMessage3" th:if="${#fields.hasErrors('logoFile')}">
             <span th:errors="*{logoFile}"></span>     
         </div>
-            
-         <input type="file" id="logo" name="logo" th:field="*{logoFile}" th:classappend="${#fields.hasErrors('logoFile')} ? 'inputError' : '' " >
-           <label id="upload" for="logo">
-     		 <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione o Logotipo
-           </label>
-			<br/><br/><br/>
 
+          <div th:if="${!editMode}">
+                 <input type="file" id="logo" name="logo" th:field="*{logoFile}" th:classappend="${#fields.hasErrors('logoFile')} ? 'inputError' : '' " >
+                   <label id="upload" for="logo">
+                     <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione o Logotipo
+                   </label>
+                    <br/><br/><br/>
+          </div>
 
 
   <div id="errorMessage" th:if="${#fields.hasErrors('password')}">
             <span th:errors="*{password}"></span>     
       </div>
-          <div id="inputUser" th:classappend="${#fields.hasErrors('password')} ? 'inputError' : '' ">
+          <div id="inputUser" th:if="${!editMode}" th:classappend="${#fields.hasErrors('password')} ? 'inputError' : '' ">
             <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
             <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
           </div>
@@ -119,7 +120,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
 
           <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'">
-          <input type="button" name="" value="Voltar" th:onclick="'location.href=\''+ @{/rastaurant/home} + '\';'"/>
+          <input type="button" name="" value="Voltar" th:onclick="'location.href=\''+ @{/restaurant/home} + '\';'"/>
 </form>
 		</div>
 	</body>
