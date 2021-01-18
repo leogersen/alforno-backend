@@ -32,6 +32,15 @@ public class ImageService {
 		
 	}
 
+    public void uploadImage(MultipartFile multiPartFile, String fileName) {
+        try {
+            IOUltils.copy(multiPartFile.getInputStream(), fileName, foodDir);
+        } catch (IOException e) {
+            throw new ApplicationServiceException(e);
+        }
+
+    }
+
 	
 	
 		public byte[] getBytes(String type, String imgName) {
@@ -52,7 +61,7 @@ public class ImageService {
 					dir = categoryDir;
 				}
 				else {
-					throw new Exception(type + "N„o È um tipo de imagem v·lida");
+					throw new Exception(type + "N√£o √© um tipo de imagem v√°lida");
 				}
 				
 				return IOUltils.getBytes(Paths.get(dir, imgName));

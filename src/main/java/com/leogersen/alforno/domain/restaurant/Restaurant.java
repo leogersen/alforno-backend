@@ -86,7 +86,7 @@ public class Restaurant extends User{
 			
 		}
 		
-		this.logo = String.format("af_restaurant_%04d.%s", getId(), FileType.of(logoFile.getContentType()).getExtension());
+		this.logo = String.format("%04d_restaurant.%s", getId(), FileType.of(logoFile.getContentType()).getExtension());
 	}
 	
 	public String getCategoriesAsText() {

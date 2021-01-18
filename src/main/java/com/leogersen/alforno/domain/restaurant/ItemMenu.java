@@ -49,7 +49,10 @@ public class ItemMenu implements Serializable {
 	private String description;
 	
 	@Size(max = 50)
-	private String image;	
+	private String image;
+
+    @UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo é inválido")
+    private transient MultipartFile imageFile;
 	
 	@NotNull(message = "O campo preço não pode estar vazio")
 	@Min(0)
@@ -62,11 +65,9 @@ public class ItemMenu implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "restaurant_id")
 	private Restaurant restaurant;
+
 	
-	@UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é válido" )
-	private transient MultipartFile imageFile;
-	
-	public void SetImageFileName() {
+	public void setImageFileName() {
 		if (getId() == null) {
 			throw new IllegalStateException("O objeto precisa primeiro ser criado");
 		}

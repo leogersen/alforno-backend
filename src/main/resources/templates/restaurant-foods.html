@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<body>
+    <div layout:fragment="content">
+
+            <div class="">
+
+              <h1>Comidas</h1>
+
+            </div>
+
+
+            <div>
+            <div th:each="item : ${itemsMenu}">
+              <span th:text="${item.name}"></span><br>
+              <span th:text="${item.category}"></span><br>
+              <span th:text="${item.description}"></span><br>
+              <span th:text="${#numbers.formatCurrency(item.price)}"></span><br>
+              <input id="buttomLarge" type="button" name="" value="Remover"
+                     th:onclick="'location.href=\'' + @{/restaurant/foods/remove} + '?itemId=' + ${item.id} + '\';'">
+                <br><br>
+            </div>
+
+            <h1>
+                <span>Nova comida:</span>
+            </h1>
+
+                <div id="divSucess" th:if="${msg != null}">
+                    <span th:text="${msg}"></span>
+                </div><br>
+
+
+
+        <form method="post" th:object="${itemMenu}" th:action="@{/restaurant/foods/save}" enctype="multipart/form-data">
+
+            <input type="hidden" name="restaurant.id" th:value="${restaurant.id}"/>
+
+                <label for="name">Item: </label><br>
+                    <div id="errorMessage" th:if="${#fields.hasErrors('name')}">
+                        <span th:errors="*{name}"></span>
+                    </div>
+
+                      <div id="inputUser" th:classappend="${#fields.hasErrors('name')} ? 'inputError' : '' ">
+                          <input type="text" id="name" name="name" placeholder="Nome do Item" th:field="*{name}"><br>
+                    </div><br>
+
+            <label for="descricao">Descrição: </label><br>
+
+                    <div id="errorMessage" th:if="${#fields.hasErrors('description')}">
+                        <span th:errors="*{description}"></span>
+                    </div>
+
+                  <div id="inputUser" th:classappend="${#fields.hasErrors('description')} ? 'inputError' : '' " >
+                      <input type="text" id="description" name="description" placeholder="Descrição" th:field="*{description}"><br>
+                    </div><br>
+
+
+            <label for="preco">Preço: </label><br>
+
+                    <div id="errorMessage" th:if="${#fields.hasErrors('price')}">
+                        <span th:errors="*{price}"></span>
+                    </div>
+
+                  <div id="inputUser" th:classappend="${#fields.hasErrors('price')} ? 'inputError' : '' ">
+                  <input type="text" id="price" name="price" placeholder="Preço" th:field="*{price}"><br>
+                    </div><br>
+
+            <label for="categoria">Categoria de comida: </label><br>
+
+                    <div id="errorMessage" th:if="${#fields.hasErrors('category')}">
+                        <span th:errors="*{category}"></span>
+                    </div>
+
+                  <div id="inputUser" th:classappend="${#fields.hasErrors('category')} ? 'inputError' : '' ">
+                  <input type="text" id="category" placeholder="Categoria" th:field="*{category}">
+                </div><br>
+
+            <label id="destaque" for="destaque">Destaque: </label>
+
+
+            <input type="checkbox" name="highlight" id="highlight" th:field="*{highlight}"><br><br>
+
+            <div id="errorMessage" th:if="${#fields.hasErrors('highlight')}">
+                <span th:errors="*{highlight}"></span>
+            </div>
+
+            <div>
+                <input type="file" id="logo" name="logo" th:field="*{imageFile}" th:classappend="${#fields.hasErrors('imageFile')} ? 'inputError' : '' " >
+                        <label id="upload" for="logo">
+                            <span id="spanUpload" class="material-icons">add_a_photo</span> Selecione a Imagem
+                        </label>
+            </div>
+            <br/><br/><br/>
+
+                    <div id="errorMessage" th:if="${#fields.hasErrors('imageFile')}">
+                        <span th:errors="*{imageFile}"></span>
+                    </div>
+
+            <input type="submit" value="Adicionar">
+            <input type="button" value="Voltar" th:onclick="'location.href=\''+ @{/restaurant/home} + '\';'">
+
+
+
+            </form>
+
+            </div>
+
+    </div>
+</body>
+</html>

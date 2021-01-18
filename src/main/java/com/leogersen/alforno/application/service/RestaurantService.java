@@ -37,6 +37,8 @@ public class RestaurantService {
 		if (restaurant.getId() != null) {
 			Restaurant restaurantDB = restaurantRepository.findById(restaurant.getId()).orElseThrow();
 			restaurant.setPassword(restaurantDB.getPassword());
+			restaurant.setLogo(restaurantDB.getLogo());
+			restaurantRepository.save(restaurant);
 			
 		}else {
 			restaurant.encryptPassword();
@@ -44,8 +46,9 @@ public class RestaurantService {
 			restaurant.setLogoFileName();
 			imageService.uploadLogo(restaurant.getLogoFile(), restaurant.getLogo());
 			
-		}		
-		
+		}
+
+
 
 	}
 	

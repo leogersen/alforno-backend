@@ -3,7 +3,7 @@ package com.leogersen.alforno.infrastruture.web.controller;
 
 import com.leogersen.alforno.application.service.*;
 import com.leogersen.alforno.application.service.ValidationException;
-import com.leogersen.alforno.domain.client.*;
+import com.leogersen.alforno.domain.order.*;
 import com.leogersen.alforno.domain.restaurant.*;
 import com.leogersen.alforno.util.*;
 import org.springframework.beans.factory.annotation.*;
@@ -13,6 +13,7 @@ import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.*;
+import java.util.*;
 
 @Controller
 @RequestMapping(path = "/restaurant")
@@ -28,8 +29,22 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    @Autowired
+    private ItemMenuRepository itemMenuRepository;
+
+    @Autowired
+    private ItemMenuService itemMenuService;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
     @GetMapping(path = "/home")
-    public String home() {
+    public String home(Model model) {
+        Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
+        List<Order> orders = orderRepository.findByRestaurant_IdOrderByDataDesc(restaurantId);
+        model.addAttribute(orders);
+
+
         return "restaurant-home";
 
     }
@@ -39,6 +54,8 @@ public class RestaurantController {
             Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
             Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
             model.addAttribute("restaurant", restaurant);
+
+
             ControllerHelper.setEditMode(model, true);
             ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
 
@@ -62,8 +79,59 @@ public class RestaurantController {
 
 
         }
-        ControllerHelper.setEditMode(model, false);
+
+        ControllerHelper.setEditMode(model, true);
+        ControllerHelper.addCategoriesToRequest(restaurantCategoryRepository, model);
         return "restaurant-signup";
+    }
+
+
+    @GetMapping(path = "/foods")
+    private String foods(Model model) {
+
+            Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            model.addAttribute("restaurant", restaurant);
+
+            List<ItemMenu> itemsMenu;
+            itemsMenu = itemMenuRepository.findByRestaurant_IdOrderByName(restaurantId);
+
+            model.addAttribute("itemsMenu", itemsMenu);
+            model.addAttribute("itemMenu", new ItemMenu());
+
+        return "restaurant-foods";
+    }
+
+    @GetMapping(path = "/foods/remove")
+    public String remove(@RequestParam("itemId") Integer itemId,
+            Model model){
+        itemMenuRepository.deleteById(itemId);
+        return "redirect:/restaurant/foods";
+    }
+
+
+    @PostMapping(path = "/foods/save")
+    public String saveItem(
+            @Valid @ModelAttribute("itemMenu") ItemMenu itemMenu,
+            Errors errors,
+            Model model) {
+
+        if (errors.hasErrors()) {
+            Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            model.addAttribute("restaurant", restaurant);
+
+            List<ItemMenu> itemsMenu;
+            itemsMenu = itemMenuRepository.findByRestaurant_IdOrderByName(restaurantId);
+
+            model.addAttribute("itemsMenu", itemsMenu);
+            model.addAttribute("msg", errors.toString());
+            return "restaurant-foods";
+
+            }
+        itemMenuService.saveItemMenu(itemMenu);
+        model.addAttribute("msg", "Item salvo com sucesso");
+        return "redirect:/restaurant/foods";
 
     }
 }

@@ -66,10 +66,12 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 		<div id="errorMessage" th:if="${#fields.hasErrors('password')}">
             <span th:errors="*{password}"></span>     
         </div>
+
           <div id="inputUser" th:if="${!editMode}" th:classappend="${#fields.hasErrors('password')} ? 'inputError' : '' ">
             <label for="senha"><img id="userImg" th:src="@{/images/af_senha.png}" alt="Senha"></label>
             <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"/><br/><br/>
           </div>
+
           <input type="hidden" name="password" value="*" th:if="${editMode}"/>
       </fieldset>
       		
