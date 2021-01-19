@@ -15,6 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     public Order findByIdAndRestaurant_Id(Integer orderId, Integer restaurantId);
 
     @Query("SELECT o FROM Order o WHERE o.restaurant.id = ?1 AND o.data BETWEEN ?2 AND ?3")
-    public List<Order> findByDateInterval(Integer restaurantId, LocalDate initialDate, LocalDate finalDate);
+    public List<Order> findByDateInterval(Integer restaurantId, LocalDateTime initialDate, LocalDateTime finalDate);
 
 }

@@ -38,6 +38,9 @@ public class RestaurantController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ReportService reportService;
+
     @GetMapping(path = "/home")
     public String home(Model model) {
         Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
@@ -170,7 +173,7 @@ public class RestaurantController {
             Model model){
 
         Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
-        List<Order> orders = orderRepository.findByRestaurant_IdOrderByDataDesc(restaurantId);
+        List<Order> orders = reportService.orderList(restaurantId, filter);
 
         model.addAttribute("orders", orders);
         model.addAttribute("filter", filter);
