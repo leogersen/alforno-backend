@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+
+<div layout:fragment="content">
+
+<!-- Header -->
+
+            <div id="divSucess" th:if="${msg != null}">
+                <span th:text="${msg}"></span>
+            </div><br>
+
+            <h1>PEDIDO</h1>
+              <form method="post" th:action="@{/restaurant/order/nextStatus}">
+                  <input type="hidden" name="orderId" th:value="${order.id}" />
+                  <input id="buttomLarge" type="submit" th:value="'Status: ' + ${order.status.description}" th:disabled="${order.status.lastOne}"><br>
+              <form>
+              <br><br>
+
+              <div class="">
+                 <b><span>Cliente</span><br></b>
+                 <span th:text="${order.client.name}"></span><br>
+                <span th:text="${order.client.formattedCep}"></span>
+
+              </div>
+              <br><br>
+
+            <div>
+                <b><span>Data</span><br></b>
+                <span th:text="${order.data}"></span>
+            </div>
+            <br><br>
+
+                <b> <span>Items:</span><br></b>
+                <div th:each="item : ${order.items}">
+
+                <span th:text="${item.itemMenu.name}"></span><br>
+                <span th:text="'Qty: ' + ${item.quantity}"></span><br>
+                <span th:text="${item.obs}"></span><br>
+                <span th:text="${#numbers.formatCurrency(item.price)}"></span>
+
+                </div>
+                <br><br>
+
+              <div>
+                  <b><span>Taxa de entrega</span><br></b>
+                  <span th:text="${#numbers.formatCurrency(order.deliveryTax)}"></span>
+              </div>
+            <br><br>
+
+                <div>
+                   <b><span>Total</span><br></b>
+                  <span th:text="${#numbers.formatCurrency(order.total)}"></span>
+                </div>
+            <br><br>
+
+            <input type="button" name="" value="Voltar" th:onclick="'location.href=\''+ @{/restaurant/home} + '\';'">
+
+</div>
+<!-- Footer -->
+</body>
+</html>

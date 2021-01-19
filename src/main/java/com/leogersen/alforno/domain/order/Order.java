@@ -46,6 +46,15 @@ public class Order implements Serializable {
         public boolean getLastOne() {
             return lastOne;
         }
+
+        public static Status fromSequence(int sequence) {
+            for(Status status : Status.values()){
+                if(status.getSequence() == sequence){
+                    return status;
+                }
+            }
+            return null;
+        }
     }
 
     @Id
@@ -81,5 +90,16 @@ public class Order implements Serializable {
 
     public  String getFormattedId() {
         return String.format("#%04d", id);
+    }
+
+    public void defineNextStatus(){
+        int sequence = status.getSequence();
+
+        Status newStatus = Status.fromSequence(sequence + 1);
+
+        if (newStatus != null) {
+            this.status = newStatus;
+        }
+
     }
 }

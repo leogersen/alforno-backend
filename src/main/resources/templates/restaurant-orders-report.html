@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
+
+
+<div layout:fragment="content">
+
+
+            <div class="">
+
+                <h1>Relatório de Itens</h1>
+                <form method="get" th:object="${filter}" th:action="@{/restaurant/report/orders}">
+                <fieldset>
+                  <label for="numero">Item: </label><br>
+                  <input type="text" id="numero" th:field="*{orderId}"><br>
+                  <label for="inicio">Início: </label><br>
+                  <input type="date" id="inicio" th:field="*{initialDate}"><br>
+                  <label for="fim">Fim: </label><br>
+                  <input type="date" id="fim" th:field="*{finalDate}"><br>
+                  <input type="submit" value="Buscar">
+                </fieldset>
+                </form>
+            </div>
+            <br/>
+
+                    <table>
+                      <tr>
+                        <th>Pedido</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                          <th>Data</th>
+                        <th>Valor</th>
+                      </tr>
+
+                      <tr th:each="order : ${orders}">
+                        <td><input type="button" th:value="${order.formattedId}"
+                                   th:onclick="'location.href=\''+ @{/restaurant/order} + '?orderId=' + ${order.id} + '\';'"></td>
+                        <td th:text="${order.client.name}"></td>
+                        <td th:text="${order.client.cep}"></td>
+                        <td th:text="${order.data}"></td>
+                        <td th:text="${#numbers.formatCurrency(order.total)}"></td>
+
+                    </table>
+                    <br/><br/>
+
+            <div class="buttons">
+            <input type="button" value="Voltar" th:onclick="'location.href=\''+ @{/restaurant/home} + '\';'">
+            </div>
+</div>
+</body>
+</html>

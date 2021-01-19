@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/client/home}">
+        xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurant/home}">
 
 
 <div layout:fragment="content">
@@ -9,9 +9,8 @@
 <div class="">
   <h1>Configurações</h1>
   <input id="buttomLarge" type="button" name="" value="Dados básicos" th:onclick="'location.href=\''+ @{/restaurant/edit} + '\';'"><br>
-  <input id="buttomLarge" type="button" name="" value="Categorias de comida"><br>
   <input id="buttomLarge" type="button" name="" value="Comidas" th:onclick="'location.href=\''+ @{/restaurant/foods} + '\';'"><br>
-  <input id="buttomLarge" type="button" name="" value="Relatório de Pedidos"onclick="location.href='restaurantOrdersReport.html';"><br>
+  <input id="buttomLarge" type="button" name="" value="Relatório de Pedidos" th:onclick="'location.href=\''+ @{/restaurant/report/orders} + '\';'"><br>
   <input id="buttomLarge" type="button" name="" value="Relatório de Itens" onclick="location.href='restaurantItensReport.html';"><br>
   <input id="buttomLarge" type="button" name="" value="Sair" th:onclick="'location.href=\''+ @{/logout} + '\';'"><br>
 
@@ -21,8 +20,8 @@
   <h1>Pedidos em andamento</h1>
 
     <div th:each="order : ${orders}">
-   <input id="buttomLarge" type="button" name="" th:value="${order.formattedId}"
-          th:onclick="'location.href=\''+ @{/restaurant/order} + '?orderId=' + ${order.id} '\';'"><br>
+    <input id="buttomLarge" type="button" name="" th:value="${order.formattedId}"
+          th:onclick="'location.href=\''+ @{/restaurant/order} + '?orderId=' + ${order.id} + '\';'"><br>
     </div>
 
 </div>

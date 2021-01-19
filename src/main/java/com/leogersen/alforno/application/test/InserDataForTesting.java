@@ -1,9 +1,11 @@
 package com.leogersen.alforno.application.test;
 
 import java.math.BigDecimal;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leogersen.alforno.domain.order.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -36,15 +38,26 @@ public class InserDataForTesting {
 	
 	@Autowired
 	private ItemMenuRepository itemMenuRepository;
+
+	@Autowired
+    private OrderRepository orderRepository;
 	
 	
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		clients();
+		Client[] clients = clients();
 		Restaurant[] restaurants = restaurants();
 		itensMenu(restaurants);
 		
-		
+		Order o = new Order();
+		o.setData(LocalDateTime.now());
+		o.setClient(clients[0]);
+		o.setRestaurant(restaurants[0]);
+		o.setStatus(Order.Status.Production);
+		o.setSubtotal(BigDecimal.valueOf(15));
+		o.setDeliveryTax(BigDecimal.valueOf(5));
+		o.setTotal(BigDecimal.valueOf(20));
+		orderRepository.save(o);
 	}
 	
 	private Restaurant[] restaurants() {

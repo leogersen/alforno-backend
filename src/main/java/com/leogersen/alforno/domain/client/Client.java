@@ -28,6 +28,10 @@ public class Client extends User{
 	@Pattern(regexp = "[0-9]{8}", message = "O CEP possui formato inv�lido")
 	@Column(length = 8)
 	private String cep;
-	
+
+
+	public String getFormattedCep() {
+	    return cep.substring(0, 5) + "-" + cep.substring(5);
+	}
 
 }

@@ -42,7 +42,7 @@ public class RestaurantController {
     public String home(Model model) {
         Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
         List<Order> orders = orderRepository.findByRestaurant_IdOrderByDataDesc(restaurantId);
-        model.addAttribute(orders);
+        model.addAttribute("orders", orders);
 
 
         return "restaurant-home";
@@ -132,6 +132,52 @@ public class RestaurantController {
         itemMenuService.saveItemMenu(itemMenu);
         model.addAttribute("msg", "Item salvo com sucesso");
         return "redirect:/restaurant/foods";
+
+    }
+
+    @GetMapping(path = "/order")
+    public String viewOrder(
+            @RequestParam("orderId") Integer orderId,
+            Model model){
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        model.addAttribute("order", order);
+
+
+
+        return "restaurant-order";
+
+    }
+
+    @PostMapping(path = "/order/nextStatus")
+    public String nextStatus(
+            @RequestParam("orderId") Integer orderId,
+            Model model){
+
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.defineNextStatus();
+        orderRepository.save(order);
+
+        model.addAttribute("order", order);
+        model.addAttribute("msg", "Status alterado com sucesso");
+
+        return "restaurant-order";
+
+    }
+
+    @GetMapping(path = "/report/orders")
+    public String orderReport(
+            @ModelAttribute("reportOrderFilter") ReportOrderFilter filter,
+            Model model){
+
+        Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
+        List<Order> orders = orderRepository.findByRestaurant_IdOrderByDataDesc(restaurantId);
+
+        model.addAttribute("orders", orders);
+        model.addAttribute("filter", filter);
+
+
+
+        return "restaurant-orders-report";
 
     }
 }
