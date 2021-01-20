@@ -183,4 +183,25 @@ public class RestaurantController {
         return "restaurant-orders-report";
 
     }
+
+    @GetMapping(path = "/report/items")
+    public String itemsReport(
+            @ModelAttribute("reportItemFilter") ReportItemFilter filter,
+            Model model){
+
+       Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
+       List<ItemMenu> itemsMenu =  itemMenuRepository.findByRestaurant_IdOrderByName(restaurantId);
+
+       List<ReportItemAmount> calculatedItems = reportService.calculateItemsRevenues(restaurantId, filter);
+
+
+        model.addAttribute("reportItemFilter", filter);
+        model.addAttribute("itemsMenu", itemsMenu);
+        model.addAttribute("calculatedItems", calculatedItems);
+
+
+
+        return "restaurant-items-report";
+
+    }
 }

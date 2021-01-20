@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/images/**", "/css/**", "/js/**", "/public", "/sbpay").permitAll()
+			.antMatchers("/images/**", "/css/**", "/js/**", "/public/**", "/4pay/**").permitAll()
 			.antMatchers("/client/**").hasRole(Role.CLIENT.toString())
 			.antMatchers("/restaurant/**").hasRole(Role.RESTAURANT.toString())
 			.anyRequest().authenticated()

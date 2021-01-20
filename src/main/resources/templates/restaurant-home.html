@@ -11,7 +11,7 @@
   <input id="buttomLarge" type="button" name="" value="Dados básicos" th:onclick="'location.href=\''+ @{/restaurant/edit} + '\';'"><br>
   <input id="buttomLarge" type="button" name="" value="Comidas" th:onclick="'location.href=\''+ @{/restaurant/foods} + '\';'"><br>
   <input id="buttomLarge" type="button" name="" value="Relatório de Pedidos" th:onclick="'location.href=\''+ @{/restaurant/report/orders} + '\';'"><br>
-  <input id="buttomLarge" type="button" name="" value="Relatório de Itens" onclick="location.href='restaurantItensReport.html';"><br>
+  <input id="buttomLarge" type="button" name="" value="Relatório de Itens" th:onclick="'location.href=\''+ @{/restaurant/report/items} + '\';'"><br>
   <input id="buttomLarge" type="button" name="" value="Sair" th:onclick="'location.href=\''+ @{/logout} + '\';'"><br>
 
 </div>
