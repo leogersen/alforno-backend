@@ -18,7 +18,6 @@ public class StringToBigDecimalConverter implements Converter<String,BigDecimal>
 
         }
 
-        source.replace(",", ".").trim();
-        return BigDecimal.valueOf(Double.valueOf(source));
+        return BigDecimal.valueOf(Double.parseDouble(source.replace(",", ".").trim()));
     }
 }
