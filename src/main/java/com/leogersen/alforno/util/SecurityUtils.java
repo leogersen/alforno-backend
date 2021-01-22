@@ -26,11 +26,11 @@ public class SecurityUtils {
 		LoggedUser loggedUser = loggedUser();
 		
 		if (loggedUser == null) {
-			throw new IllegalStateException("N„o existe um usu·rio logado");
+			throw new IllegalStateException("NÔøΩo existe um usu√°rio logado");
 		}
 		
 		if (!(loggedUser.getUser() instanceof Client)) {
-			throw new IllegalStateException("O usu·rio logado n„o È um Cliente");
+			throw new IllegalStateException("O usu√°rio logado n√£o √© um Cliente");
 		}
 		
 		return (Client) loggedUser.getUser();		
@@ -40,11 +40,11 @@ public class SecurityUtils {
 		LoggedUser loggedUser = loggedUser();
 		
 		if (loggedUser == null) {
-			throw new IllegalStateException("N„o existe um restaurante logado");
+			throw new IllegalStateException("N√£o existe um restaurante logado");
 		}
 		
 		if (!(loggedUser.getUser() instanceof Restaurant)) {
-			throw new IllegalStateException("O usu·rio logado n„o È um Restaurante");
+			throw new IllegalStateException("O usu√°rio logado n√£o √© um Restaurante");
 		}
 		
 		return (Restaurant) loggedUser.getUser();		

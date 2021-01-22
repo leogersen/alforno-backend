@@ -1,5 +1,6 @@
 package com.leogersen.alforno.application.service;
 
+@SuppressWarnings("serial")
 public class PaymentException extends Exception {
 
     public PaymentException() {

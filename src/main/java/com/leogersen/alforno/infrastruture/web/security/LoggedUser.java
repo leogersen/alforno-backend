@@ -1,8 +1,6 @@
 package com.leogersen.alforno.infrastruture.web.security;
 
 import java.util.Collection;
-import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.leogersen.alforno.domain.client.Client;
 import com.leogersen.alforno.domain.restaurant.Restaurant;
 import com.leogersen.alforno.domain.user.User;
+import com.leogersen.alforno.util.CollectionUtils;
 
 @SuppressWarnings("serial")
 public class LoggedUser implements UserDetails {
@@ -30,10 +29,10 @@ public class LoggedUser implements UserDetails {
 			role = Role.RESTAURANT;
 			
 		} else {
-			throw new IllegalStateException("O tipo de usu·rio n„o È v·lido");
+			throw new IllegalStateException("O tipo de usu√°rio n√£o √© v√°lido");
 		}
 		this.role = role;
-		this.roles = List.of(new SimpleGrantedAuthority("ROLE_" + role));
+		this.roles = CollectionUtils.listOf(new SimpleGrantedAuthority("ROLE_" + role));
 				
 	}
 	

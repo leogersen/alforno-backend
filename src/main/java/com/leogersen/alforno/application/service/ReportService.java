@@ -4,11 +4,7 @@ import com.leogersen.alforno.domain.order.*;
 import com.leogersen.alforno.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import org.springframework.web.multipart.*;
-
-import java.io.*;
 import java.math.*;
-import java.nio.file.*;
 import java.time.*;
 import java.util.*;
 
@@ -24,7 +20,7 @@ public class ReportService {
 
         if(orderId != null) {
             Order order = orderRepository.findByIdAndRestaurant_Id(orderId, restaurantId);
-            return List.of(order);
+            return CollectionUtils.listOf(order);
         }
         LocalDate initialDate = filter.getInitialDate();
         LocalDate finalDate = filter.getFinalDate();
@@ -50,7 +46,7 @@ public class ReportService {
         LocalDate finalDate = filter.getFinalDate();
 
         if(initialDate == null){
-            return List.of();
+            return CollectionUtils.listOf();
         }
 
         if(finalDate == null){

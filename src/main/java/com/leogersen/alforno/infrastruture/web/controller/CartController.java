@@ -2,6 +2,9 @@ package com.leogersen.alforno.infrastruture.web.controller;
 
 import com.leogersen.alforno.domain.order.*;
 import com.leogersen.alforno.domain.restaurant.*;
+
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -40,7 +43,7 @@ public class CartController {
             @ModelAttribute("cart") Cart cart,
             Model model) {
 
-        ItemMenu itemMenu = itemMenuRepository.findById(itemId).orElseThrow();
+        ItemMenu itemMenu = itemMenuRepository.findById(itemId).orElseThrow(NoSuchElementException::new);
 
         try {
             cart.addItem(itemMenu, quantity, obs);
@@ -58,7 +61,7 @@ public class CartController {
             SessionStatus sessionStatus,
             Model model) {
 
-        ItemMenu itemMenu = itemMenuRepository.findById(itemId).orElseThrow();
+        ItemMenu itemMenu = itemMenuRepository.findById(itemId).orElseThrow(NoSuchElementException::new);
 
         cart.removeItem(itemMenu);
 
@@ -76,7 +79,7 @@ public class CartController {
             @ModelAttribute("cart") Cart cart,
             Model model){
 
-        Order order = orderRepository.findById(orderId).orElseThrow();
+        Order order = orderRepository.findById(orderId).orElseThrow(NoSuchElementException::new);
 
         cart.clear();
 

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.leogersen.alforno.domain.order.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +64,9 @@ public class InserDataForTesting {
 	private Restaurant[] restaurants() {
 		List<Restaurant> restaurants = new ArrayList<>();
 		
-		RestaurantCategory lanchesCategory = restaurantCategoryRepository.findById(1).orElseThrow();
-		RestaurantCategory pizzaCategory = restaurantCategoryRepository.findById(2).orElseThrow();
-		RestaurantCategory japonesaCategory = restaurantCategoryRepository.findById(3).orElseThrow();
+		RestaurantCategory lanchesCategory = restaurantCategoryRepository.findById(1).orElseThrow(NoSuchElementException::new);
+		RestaurantCategory pizzaCategory = restaurantCategoryRepository.findById(2).orElseThrow(NoSuchElementException::new);
+		RestaurantCategory japonesaCategory = restaurantCategoryRepository.findById(3).orElseThrow(NoSuchElementException::new);
 		
 		Restaurant r = new Restaurant();
 		r.setName("Mc Donalds's");

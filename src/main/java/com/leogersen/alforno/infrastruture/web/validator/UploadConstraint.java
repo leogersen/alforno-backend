@@ -19,7 +19,7 @@ import com.leogersen.alforno.util.FileType;
 @Constraint(validatedBy = UploadValidator.class)
 public @interface UploadConstraint {
 	
-	String message() default "Arquivo Inv·lido";
+	String message() default "Arquivo Inv√°lido";
 	FileType[] acceptedTypes();
 	
 	Class<?>[] groups() default {};

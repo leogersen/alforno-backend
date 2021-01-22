@@ -1,7 +1,6 @@
 package com.leogersen.alforno.domain.order;
 
 import com.leogersen.alforno.domain.restaurant.*;
-import com.sun.istack.*;
 import com.sun.istack.NotNull;
 import lombok.*;
 

@@ -1,6 +1,9 @@
 package com.leogersen.alforno.infrastruture.web.controller;
 
 import com.leogersen.alforno.domain.order.*;
+
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -20,7 +23,7 @@ public class OrderController {
 
             {
 
-        Order order = orderRepository.findById(orderId).orElseThrow();
+        Order order = orderRepository.findById(orderId).orElseThrow(NoSuchElementException::new);
         model.addAttribute("order", order);
 
         return "client-order";

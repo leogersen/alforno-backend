@@ -1,6 +1,7 @@
 package com.leogersen.alforno.infrastruture.web.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -65,7 +66,7 @@ public class ClientController {
 	@GetMapping(path = "/edit")
 	public String edit(Model model) {
 		Integer clientId = SecurityUtils.loggedClient().getId();
-		Client client = clientRepository.findById(clientId).orElseThrow();
+		Client client = clientRepository.findById(clientId).orElseThrow(NoSuchElementException::new);
 		model.addAttribute("client", client);
 		ControllerHelper.setEditMode(model, true);
 		
@@ -120,7 +121,7 @@ public class ClientController {
             @RequestParam(value = "category", required = false) String category,
             Model model) {
 
-	        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+	        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(NoSuchElementException::new);
 	        model.addAttribute("restaurant", restaurant);
 	        model.addAttribute("cep", SecurityUtils.loggedClient().getCep());
 

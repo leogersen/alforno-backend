@@ -3,6 +3,7 @@ package com.leogersen.alforno.application.service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.leogersen.alforno.domain.restaurant.*;
 import com.leogersen.alforno.util.*;
@@ -30,12 +31,12 @@ public class RestaurantService {
 	public void saveRestaurant(Restaurant restaurant) throws ValidationException {
 		
 		if (!validateEmail(restaurant.getEmail(), restaurant.getId())) {
-			throw new ValidationException("O e-mail já está cadastrado");
+			throw new ValidationException("O e-mail jÃ¡ estÃ¡ cadastrado");
 		 
 		}
 		
 		if (restaurant.getId() != null) {
-			Restaurant restaurantDB = restaurantRepository.findById(restaurant.getId()).orElseThrow();
+			Restaurant restaurantDB = restaurantRepository.findById(restaurant.getId()).orElseThrow(NoSuchElementException::new);
 			restaurant.setPassword(restaurantDB.getPassword());
 			restaurant.setLogo(restaurantDB.getLogo());
 			restaurantRepository.save(restaurant);
@@ -91,7 +92,7 @@ public class RestaurantService {
 			restaurants = restaurantRepository.findByCategories_Id(filter.getCategoryId());
 
 		} else {
-			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado");
+			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " nï¿½o ï¿½ suportado");
 		}
 
 		Iterator<Restaurant> it = restaurants.iterator();

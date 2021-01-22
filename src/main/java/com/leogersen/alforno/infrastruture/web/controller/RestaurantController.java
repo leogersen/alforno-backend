@@ -55,7 +55,7 @@ public class RestaurantController {
     @GetMapping(path = "/edit")
     public String edit(Model model) {
             Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
-            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(NoSuchElementException::new);
             model.addAttribute("restaurant", restaurant);
 
 
@@ -93,7 +93,7 @@ public class RestaurantController {
     private String foods(Model model) {
 
             Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
-            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(NoSuchElementException::new);
             model.addAttribute("restaurant", restaurant);
 
             List<ItemMenu> itemsMenu;
@@ -121,7 +121,7 @@ public class RestaurantController {
 
         if (errors.hasErrors()) {
             Integer restaurantId = SecurityUtils.loggedRestaurant().getId();
-            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(NoSuchElementException::new);
             model.addAttribute("restaurant", restaurant);
 
             List<ItemMenu> itemsMenu;
@@ -142,7 +142,7 @@ public class RestaurantController {
     public String viewOrder(
             @RequestParam("orderId") Integer orderId,
             Model model){
-        Order order = orderRepository.findById(orderId).orElseThrow();
+        Order order = orderRepository.findById(orderId).orElseThrow(NoSuchElementException::new);
         model.addAttribute("order", order);
 
 
@@ -156,7 +156,7 @@ public class RestaurantController {
             @RequestParam("orderId") Integer orderId,
             Model model){
 
-        Order order = orderRepository.findById(orderId).orElseThrow();
+        Order order = orderRepository.findById(orderId).orElseThrow(NoSuchElementException::new);
         order.defineNextStatus();
         orderRepository.save(order);
 

@@ -7,7 +7,8 @@ import java.util.Comparator;
 public class RestaurantComparator implements Comparator<Restaurant> {
 
     private SearchFilter filter;
-    private String cep;
+    @SuppressWarnings("unused")
+	private String cep;
 
     public RestaurantComparator(SearchFilter filter, String cep) {
         this.filter = filter;
@@ -26,7 +27,7 @@ public class RestaurantComparator implements Comparator<Restaurant> {
         } else if (filter.getOrder() == Order.Time) {
             result = r1.getDeliveryTime().compareTo(r2.getDeliveryTime());
         }else {
-            throw new IllegalStateException("O valor da ordenaÁ„o " + filter.getOrder() + " n„o È v·lido");
+            throw new IllegalStateException("O valor da ordena√ß√£o " + filter.getOrder() + " n√£o √© v√°lido");
         }
 
         return filter.isAsc() ? result : -result;

@@ -1,5 +1,7 @@
 package com.leogersen.alforno.application.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +25,12 @@ public class ClientService {
 	public void saveClient(Client client) throws ValidationException {
 		
 		if (!validateEmail(client.getEmail(), client.getId())) {
-			throw new ValidationException("O e-mail j· est· cadastrado");
+			throw new ValidationException("O e-mail j√° est√° cadastrado");
 		
 		}
 		
 		if (client.getId() != null) {
-			Client clientDB = clientRepository.findById(client.getId()).orElseThrow();
+			Client clientDB = clientRepository.findById(client.getId()).orElseThrow(NoSuchElementException::new);
 			client.setPassword(clientDB.getPassword());
 			
 		}else {

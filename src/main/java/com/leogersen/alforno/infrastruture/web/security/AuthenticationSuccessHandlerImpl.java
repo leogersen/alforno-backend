@@ -25,7 +25,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		} else if (role == Role.RESTAURANT) {
 			response.sendRedirect("restaurant/home");
 		}else {
-			throw new IllegalStateException("Erro de autenticação");
+			throw new IllegalStateException("Erro de autenticaÃ§Ã£o");
 		}
 		
 	}
