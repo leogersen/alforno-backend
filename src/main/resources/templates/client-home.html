@@ -24,7 +24,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 		
 		  <div id="divCat" th:each="category : ${categories}">
 		    <a href="#" th:onclick="'searchRest(' + ${category.id} + ');'">
-		      <img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
+		      <img id="catImg" th:src="@{/image/category/} + ${category.image} " alt="">
 		      <br/>
 		      <span th:text="${category.name}"></span>
 		    </a>

@@ -16,7 +16,7 @@
          <span th:text="${order.status.description}"></span>
         </div> <br/>
 
-    <img id="restImg" th:src="@{/images/logos/} + ${order.restaurant.logo}" alt="Rest1"><br/><br/>
+    <img id="restImg" th:src="@{/image/logo/} + ${order.restaurant.logo}" alt="Rest1"><br/><br/>
 
         <div th:each="item : ${order.items}"><br/>
             <span id="restName" th:text="${item.itemMenu.name}"></span><br/><br/>

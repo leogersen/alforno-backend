@@ -7,7 +7,7 @@
 <div layout:fragment="content">
 
 <div class="">
-    <img id="restImg" th:src="@{/images/logos/} + ${restaurant.logo}" alt="Rest1"><br/>
+    <img id="restImg" th:src="@{/image/logo/} + ${restaurant.logo}" alt="Rest1"><br/>
     <span th:text="${restaurant.name}"></span><br/>
     <span th:text="${restaurant.categoriesAsText}"></span><br/>
     <span th:text="'Tempo médio de entrega: ' + ${restaurant.deliveryTime} + 'm'"></span><br/>
@@ -41,7 +41,7 @@
 <div class="geral">
 
   <div th:each="item : ${itemsMenuHighlight}">
-    <img id="restImg" th:src="@{/images/foods/} + ${item.image}" alt="Food">
+    <img id="restImg" th:src="@{/image/food/} + ${item.image}" alt="Food">
     <br/>
     <span th:text="${item.name}"></span>
     <br/>
@@ -77,7 +77,7 @@
     </div>
 
     <div th:each="item : ${itemsMenuNotHighlight}">
-        <img id="restImg" th:src="@{/images/foods/} + ${item.image}" alt="Food">
+        <img id="restImg" th:src="@{/image/food/} + ${item.image}" alt="Food">
         <br/>
         <span th:text="${item.name}"></span>
         <br/>

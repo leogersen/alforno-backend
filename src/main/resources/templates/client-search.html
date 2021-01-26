@@ -24,7 +24,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 					<div id="divGeralCat" class="">
 						<div id="divCat" th:each="category : ${categories}">
 							<a href="#" th:onclick="'searchRest(' + ${category.id} + ');'">
-							<img id="catImg" th:src="@{/images/categories/} + ${category.image} " alt="">
+							<img id="catImg" th:src="@{/image/category/} + ${category.image} " alt="">
 							<br/>
 							<span th:text="${category.name}"></span>
 							</a>
@@ -50,7 +50,7 @@ xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{
 			    <div id="divRestGeral">
 			          <div id="divRest" th:each="restaurant : ${restaurants}">
 			            <a th:href="@{/client/restaurant} + '?restaurantId=' + ${restaurant.id}">
-			              <img id="restImg" th:src="@{/images/logos/} + ${restaurant.logo}" alt="Rest1"><br/>
+			              <img id="restImg" th:src="@{/image/logo/} + ${restaurant.logo}" alt="Rest1"><br/>
 
 			              <span id="restName" th:text="${restaurant.name}"></span><br/>
 			              <span th:text="${restaurant.categoriesAsText}"></span><br/>
